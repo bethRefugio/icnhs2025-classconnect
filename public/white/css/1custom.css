@@ -1,0 +1,203 @@
+.form-check input[type="checkbox"], .radio input[type="radio"] {
+  opacity: 0.5;
+  visibility: unset;
+}
+
+.form-check-input {
+  margin-top: 0.2rem !important;
+  margin-left: -1.45rem !important;
+
+}
+
+.alert.alert-success {
+  background-color: #d9f1e3 !important;
+  color: rgba(34, 42, 66, 0.7) !important;
+}
+
+.btn-default {
+  background: rgba(34, 42, 66, 0.7) !important;
+}
+
+.btn-default:hover {
+  background: #000 !important;
+}
+
+.btn-icon-only {
+  background: rgba(34, 42, 66, 0.7) !important;
+  color: #fff;
+}
+
+.btn-icon-only:hover {
+  background: #000 !important;
+  color: #fff;
+}
+
+.btn-icon-only:active {
+  background: #000 !important;
+  color: #fff;
+}
+
+.custom_text_area {
+  border: 1px solid rgba(29, 37, 59, 0.5) !important;
+  border-radius: 10px !important;
+}
+
+.sidebar_search {
+  color: #fff !important;
+  border-color: #eee !important;
+  width: 90% !important;
+}
+
+.sidebar_search::placeholder {
+  color: #fff !important;
+}
+
+.form-check .form-check-sign::before, .form-check .form-check-sign::after {
+  border: 1px solid #fff;
+}
+
+.login-page .card-login.card-white .card-header .card-title {
+  color: #204d74;
+  text-align: center;
+  top: 50px;
+}
+
+.card-register.card-white .card-header .card-title {
+  color: #204d74;
+}
+
+.bottom_player {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 999;
+  background-color: #fff;
+  width: 100%;
+  border: 2px solid #eee;
+  padding: 10px;
+  overflow: hidden;
+
+}
+
+.custom_link {
+  color: #ff66c4;
+  font-weight: 300;
+  cursor: pointer;
+}
+
+.custom_link:hover {
+  color: #fd5d93;
+}
+
+@keyframes spinner-border {
+  to { transform: rotate(360deg); }
+}
+
+.spinner-border {
+  position: relative;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  overflow: hidden;
+  text-indent: -999em;
+  vertical-align: text-bottom;
+  border: .25em solid;
+  border-color: currentColor transparent currentColor currentColor;
+  border-radius: 50%;
+  animation-name: spinner-border;
+  animation-duration: .75s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.spinner-border-reverse {
+  border-color: transparent currentColor transparent transparent;
+
+  &::after {
+    position: absolute;
+    top: -.25em;
+    right: -.25em;
+    bottom: -.25em;
+    left: -.25em;
+    display: inline-block;
+    content: "";
+    border: .25em solid rgba(0, 0, 0, .1);
+    border-radius: 50%;
+  }
+}
+
+.spinner-border-sm {
+  width: 1rem;
+  height: 1rem;
+  border-width: .2em;
+
+  &.spinner-border-reverse::after {
+    border-width: .2em;
+  }
+}
+
+//
+// Growing circle
+//
+
+@keyframes spinner-grow {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+.spinner-grow {
+  position: relative;
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  overflow: hidden;
+  text-indent: -999em;
+  vertical-align: text-bottom;
+  background-color: currentColor;
+  border-radius: 50%;
+  animation-name: spinner-grow;
+  animation-duration: .75s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.spinner-grow-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+.w-5.h-5 {
+  width: 10px !important;
+}
+.text-sm.text-gray-700.leading-5 {
+    padding: 20px;
+}
+
+.flex.justify-between.flex-1.sm\:hidden {
+  display: none;
+}
+
+
+
+
+
+.modal-search .modal-dialog span {
+  font-size: unset;
+  color: #000;
+}
+.aplayer-author {
+  color: #000;
+}
+.aplayer .aplayer-list ol li .aplayer-list-author {}
+  color: #000;
+}
