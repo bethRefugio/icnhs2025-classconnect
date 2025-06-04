@@ -16,23 +16,15 @@ class Teacher extends Model
      * @var array
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'gender',
+        'name',
         'user_id',
-        'grade',
-        'section',
-        'school_id',
         'building_id',
-        'classroom_id',
+        'room_id',
         'department_id',
         'email',
+        'contact_no',
+        'vacant_time',
         'profile_pic',
-        'position',
-        'facebook',
-        'twitter',
-        'position',
-        'instagram',
     ];
 
     /**
@@ -56,7 +48,7 @@ class Teacher extends Model
      */
     public function department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(Department::class, 'department_id');
     }
 
     /**

@@ -16,23 +16,75 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         DB::table('departments')->insert([
-            'abbrv' => 'TLE',
-            'name' => 'Technology and Livelihood Education',
-            'user_id' => 1,
+            'id' => 1,
+            'abbrv' => 'FIL',
+            'name' => 'Filipino',
+            'head' => 'Edarline E. Quiapo',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('departments')->insert([
+            'id' => 2,
+            'abbrv' => 'Math',
+            'name' => 'Mathematics',
+            'head' => 'Annabelle E. De Guzman',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('departments')->insert([
+            'id' => 3,
+            'abbrv' => 'Science',
+            'name' => 'Science',
+            'head' => 'Jeremy P. Sacon',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('departments')->insert([
+            'id' => 4,
             'abbrv' => 'English',
             'name' => 'English',
-            'user_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('departments')->insert([
-            'abbrv' => 'Math',
-            'name' => 'Math',
-            'user_id' => 1,
+            'id' => 5,
+            'abbrv' => 'MAPEH',
+            'name' => 'Music, Arts, Physical Education, and Health',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('departments')->insert([
+            'id' => 6,
+            'abbrv' => 'TLE',
+            'name' => 'Technology and Livelihood Education',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('departments')->insert([
+            'id' => 7,
+            'abbrv' => 'SNED',
+            'name' => 'Special Needs Education',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('departments')->insert([
+            'id' => 8,
+            'abbrv' => 'ALS',
+            'name' => 'Alternative Learning System',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('departments')->insert([
+            'id' => 9,
+            'abbrv' => 'AP',
+            'name' => 'Araling Panlipunan',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('departments')->insert([
+            'id' => 10,
+            'abbrv' => 'ESP',
+            'name' => 'Edukasyon sa Pagpapakatao',
             'created_at' => now(),
             'updated_at' => now()
         ]);

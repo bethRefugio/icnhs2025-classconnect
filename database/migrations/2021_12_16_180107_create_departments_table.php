@@ -15,7 +15,6 @@ class CreateDepartmentsTable extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users'); // added by
             $table->string('abbrv', 100)->nullable();
             $table->string('name')->nullable();
             $table->string('head')->nullable();

@@ -25,11 +25,11 @@
                 <tr>
                   <th scope="col">Id</th>
                   <th scope="col">Fullname</th>
-                  <th scope="col">Grade</th>
-                  <th scope="col">Section</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Contact Number</th>
+                  <th scope="col">Department</th>
                   <th scope="col">Classroom</th>
                   <th scope="col">Building</th>
-                  <th scope="col">School</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -37,9 +37,14 @@
                 @foreach ($teachers as $teacher)
                   <tr>
                     <td>{{ $teacher->id }}</td>
-                    <td><a href="/teacher/{{ $teacher->id }}/edit">{{ $teacher->first_name .' '.$teacher->last_name }}</a></td>
-                    <td>{{ $teacher->grade }}</td>
-                    <td>{{ $teacher->section }}</td>
+                    <td>{{ $teacher->name }}</td>
+                    <td>{{ $teacher->email }}</td>
+                    <td>{{ $teacher->contact_no }}</td>
+                    <td>
+                      @if( isset($teacher->department->name) )
+                        {{  $teacher->department->name }}
+                      @endif()
+                    </td>
                     <td>
                       @if( isset($teacher->classroom->name) )
                         {{  $teacher->classroom->name }}
@@ -48,11 +53,6 @@
                     <td>
                       @if( isset($teacher->building->name) )
                         {{  $teacher->building->name }}
-                      @endif()
-                    </td>
-                    <td>
-                      @if( isset($teacher->building->school->name) )
-                        {{  $teacher->building->school->name }}
                       @endif()
                     </td>
                     <td class="text-right">
