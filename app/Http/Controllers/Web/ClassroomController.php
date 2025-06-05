@@ -39,7 +39,6 @@ class ClassroomController extends Controller
      */
     public function store(Store $request)
     {
-        $request['user_id'] = auth()->user()->id;
         $classroom = Classroom::create($request->all());
         return \Redirect::to('classroom')->withStatus(__('Classroom successfully added.'));
     }

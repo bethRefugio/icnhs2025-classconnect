@@ -20,14 +20,10 @@
                                 @include('alerts.feedback', ['field' => 'name'])
                             </div>
 
-                            <div class="form-group{{ $errors->has('school_id') ? ' has-danger' : '' }}">
-                                <label>{{ _('School') }}</label>
-                                <select name="school_id" class="form-control">
-                                    @foreach ($schools as $school)
-                                        <option value="{{ $school->id }}">{{ $school->name }}</option>
-                                    @endforeach
-                                </select>
-                                @include('alerts.feedback', ['field' => 'school_id'])
+                            <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
+                                <label>{{ _('No. of Floors') }}</label>
+                                <input type="text" name="no_of_floors" class="form-control{{ $errors->has('no_of_floors') ? ' is-invalid' : '' }}" placeholder="{{ _('Enter the no. of floors') }}" value="{{ old('no_of_floors', '') }}">
+                                @include('alerts.feedback', ['field' => 'no_of_floors'])
                             </div>
                     </div>
                     <div class="card-footer">

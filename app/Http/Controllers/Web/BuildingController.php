@@ -39,7 +39,6 @@ class BuildingController extends Controller
      */
     public function store(Store $request)
     {
-        $request['user_id'] = auth()->user()->id;
         $building = Building::create($request->all());
         return \Redirect::to('building')->withStatus(__('Building successfully added.'));
     }

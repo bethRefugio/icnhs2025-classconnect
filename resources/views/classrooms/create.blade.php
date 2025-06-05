@@ -14,10 +14,22 @@
 
                             @include('alerts.success')
 
+                            <div class="form-group{{ $errors->has('room_no') ? ' has-danger' : '' }}">
+                                <label>{{ _('Room Number') }}</label>
+                                <input type="text" name="room_no" class="form-control" required value="{{ old('room_no') }}">
+                                @include('alerts.feedback', ['field' => 'room_no'])
+                            </div>
+
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                 <label>{{ _('Name') }}</label>
                                 <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ _('Enter classroom name') }}" value="{{ old('name', '') }}">
                                 @include('alerts.feedback', ['field' => 'name'])
+                            </div>
+
+                            <div class="form-group{{ $errors->has('floor_no') ? ' has-danger' : '' }}">
+                                <label>{{ _('Floor number') }}</label>
+                                <input type="text" name="floor_no" class="form-control{{ $errors->has('floor_no') ? ' is-invalid' : '' }}" placeholder="{{ _('Enter classroom floor') }}" value="{{ old('floor_no', '') }}">
+                                @include('alerts.feedback', ['field' => 'floor_no'])
                             </div>
 
                             <div class="form-group{{ $errors->has('building_id') ? ' has-danger' : '' }}">
