@@ -15,9 +15,10 @@ class CreateClassroomsTable extends Migration
     {
         Schema::create('classrooms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users'); // added by
             $table->foreignId('building_id')->nullable()->constrained('buildings');
-            $table->string('name');
+            $table->string('room_no');
+            $table->string('name')->nullable();
+            $table->string('floor_no')->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });

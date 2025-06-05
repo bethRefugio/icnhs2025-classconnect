@@ -24,11 +24,11 @@
               <thead class=" text-primary">
                 <tr>
                   <th scope="col">Id</th>
-                  <th scope="col">ClassRroom</th>
+                  <th scope="col">Classroom Number</th>
+                  <th scope="col">Classroom Name</th>
                   <th scope="col">Building</th>
-                  <th scope="col">School</th>
                   <th scope="col">Date Added</th>
-                  <th scope="col">Added By</th>
+                  <th scope="col">Date Updated</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -36,11 +36,11 @@
                 @foreach ($classrooms as $classroom)
                   <tr>
                     <td>{{ $classroom->id }}</td>
-                    <td><a href="/classroom/{{ $classroom->id }}/edit">{{ $classroom->name }}</a></td>
+                    <td><a href="/classroom/{{ $classroom->id }}/edit">{{ $classroom->room_no }}</a></td>
+                    <td>{{ $classroom->name }}</td>
                     <td>{{ $classroom->building->name }}</td>
-                    <td>{{ $classroom->building->school->name }}</td>
                     <td>{{ $classroom->created_at }}</td>
-                    <td>{{ $classroom->user->name }}</td>
+                    <td>{{ $classroom->updated_at }}</td>
                     <td class="text-right">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

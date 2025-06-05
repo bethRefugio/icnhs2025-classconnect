@@ -25,9 +25,9 @@
                 <tr>
                   <th scope="col">Id</th>
                   <th scope="col">Building</th>
-                  <th scope="col">School</th>
+                  <th scope="col">No. of Floors</th>
                   <th scope="col">Date Added</th>
-                  <th scope="col">Added By</th>
+                  <th scope="col">Date Updated</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -36,9 +36,9 @@
                   <tr>
                     <td>{{ $building->id }}</td>
                     <td><a href="/building/{{ $building->id }}/edit">{{ $building->name }}</a></td>
-                    <td>{{ $building->school->name }}</td>
+                    <td>{{ $building->no_of_floors }}</td>
                     <td>{{ $building->created_at }}</td>
-                    <td>{{ $building->user->name }}</td>
+                    <td>{{ $building->updated_at }}</td>
                     <td class="text-right">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

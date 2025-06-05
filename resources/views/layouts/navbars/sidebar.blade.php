@@ -25,6 +25,7 @@
             </li>
         @endif
 
+        <!-- 
         @if (auth()->user()->account_id != 3)
             <li>
                 <a data-toggle="collapse" href="#school-div" aria-expanded="true">
@@ -50,6 +51,7 @@
                     </ul>
                 </div>
             </li>
+            -->
 
             <li>
                 <a data-toggle="collapse" href="#building-div" aria-expanded="true">
