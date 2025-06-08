@@ -26,6 +26,7 @@
                   <th scope="col">Id</th>
                   <th scope="col">Classroom Number</th>
                   <th scope="col">Classroom Name</th>
+                  <th scope="col">Floor Number</th>
                   <th scope="col">Building</th>
                   <th scope="col">Date Added</th>
                   <th scope="col">Date Updated</th>
@@ -38,6 +39,7 @@
                     <td>{{ $classroom->id }}</td>
                     <td><a href="/classroom/{{ $classroom->id }}/edit">{{ $classroom->room_no }}</a></td>
                     <td>{{ $classroom->name }}</td>
+                    <td>{{ $classroom->floor_no }}</td>
                     <td>{{ $classroom->building->name }}</td>
                     <td>{{ $classroom->created_at }}</td>
                     <td>{{ $classroom->updated_at }}</td>

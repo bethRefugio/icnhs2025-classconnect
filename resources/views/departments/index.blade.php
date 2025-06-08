@@ -28,6 +28,7 @@
                   <th scope="col">Name</th>
                   <th scope="col">Head</th>
                   <th scope="col">Date Added</th>
+                  <th scope="col">Date Updated</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -39,6 +40,7 @@
                     <td><a href="/department/{{ $department->id }}/edit">{{ $department->name }}</a></td>
                     <td>{{ $department->head }}</td>
                     <td>{{ $department->created_at }}</td>
+                    <td>{{ $department->updated_at }}</td>
                     <td class="text-right">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

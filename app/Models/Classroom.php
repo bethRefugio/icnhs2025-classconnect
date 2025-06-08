@@ -16,8 +16,9 @@ class Classroom extends Model
      * @var array
      */
     protected $fillable = [
+        'room_no',
         'name',
-        'user_id',
+        'floor_no',
         'building_id',
     ];
 

@@ -38,7 +38,6 @@ class DepartmentController extends Controller
      */
     public function store(Store $request)
     {
-        $request['user_id'] = auth()->user()->id;
         $department = Department::create($request->all());
         return \Redirect::to('department')->withStatus(__('Department successfully added.'));
     }

@@ -62,7 +62,7 @@ class ClassroomController extends Controller
      */
     public function edit(Classroom $classroom)
     {
-        return view('classrooms.edit', ['classroom' => $classroom, 'buildings' => Building::get()]);
+        return view('classrooms.edit', ['classroom' => $classroom,'buildings' => Building::get()]);
     }
 
     /**

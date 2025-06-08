@@ -25,6 +25,7 @@ class Store extends FormRequest
     {
       return [
         'name' => ['required', 'string'],
+        'no_of_floors' => ['string']
       ];
     }
 
