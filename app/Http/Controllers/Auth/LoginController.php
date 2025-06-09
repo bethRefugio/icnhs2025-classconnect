@@ -59,4 +59,27 @@ class LoginController extends Controller
             return back()->with('error', 'Email or Password is incorrect or your account still need to be check by the admin!');
         }
     }
+
+    public function apiLogin(Request $request)
+    {
+        $login = [
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'is_allowed_login' => true
+        ];
+
+        if (\Auth::attempt($login)) {
+            $user = \Auth::user();
+            return response()->json([
+                'success' => true,
+                'userId' => $user->id,
+                'user' => $user,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Email or Password is incorrect or your account still needs to be checked by the admin!',
+            ], 401);
+        }
+    }
 }

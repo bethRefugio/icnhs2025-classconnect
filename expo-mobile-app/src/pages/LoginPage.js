@@ -1,79 +1,180 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ImageBackground } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, KeyboardAvoidingView, Platform, Image } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react-native';
 
 const LoginPage = ({ navigation, onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
-  try {
-    const response = await axios.post('http://192.168.1.10:5000/login', { email, password }, { withCredentials: true });
-    if (response.status === 200) {
-      const { userId } = response.data;
-
-      // Store userId in AsyncStorage as a string
-      await AsyncStorage.setItem('userId', String(userId));
-
-      // Call the onLogin callback to update the app state
-      onLogin();
+    setError('');
+    try {
+      const response = await axios.post('http://192.168.137.1/api/doLogin', { email, password });
+      if (response.status === 200) {
+        const { userId } = response.data;
+        await AsyncStorage.setItem('userId', String(userId));
+        onLogin();
+      }
+    } catch (error) {
+      const msg = error.response?.data?.message || 'Invalid email or password';
+      setError(msg);
+      Alert.alert('Login Failed', msg);
     }
-  } catch (error) {
-    console.error("Login error:", error.response?.data?.message || error.message);
-
-    // Handle specific error messages
-    if (error.response?.status === 403 && error.response?.data?.message === "This account doesn't exist anymore") {
-      Alert.alert('Login Failed', "This account doesn't exist anymore");
-    } else {
-      Alert.alert('Login Failed', error.response?.data?.message || 'Invalid email or password');
-    }
-  }
-};
+  };
 
   return (
-    <ImageBackground source={require('../../assets/logo_enhanced.png')} style={styles.background}>
-      <View style={styles.overlay} />
-      <View style={styles.container}>
-        <Text style={styles.title}>Login</Text>
-        <TextInput
-          placeholder="Email"
-          placeholderTextColor="#ccc"
-          style={styles.input}
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        <TextInput
-          placeholder="Password"
-          placeholderTextColor="#ccc"
-          style={styles.input}
-          value={password}
-          onChangeText={setPassword}
-          secureTextEntry
-        />
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
+    <KeyboardAvoidingView style={{flex: 1, backgroundColor: '#295393'}} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <View style={styles.logoContainer}>
+        <Image source={require('../../assets/classconnect_no_bg.png')} style={styles.logo} resizeMode="contain" />
+        <Text style={styles.logoText}>CLASSCONNECT</Text>
+      </View>
+      <View style={styles.card}>
+        <Text style={styles.loginTitle}>Log in</Text>
+        {error ? (
+          <Text style={styles.errorText}>{error}</Text>
+        ) : null}
+        <Text style={styles.label}>Email</Text>
+        <View style={styles.inputWrapper}>
+          <Mail color="#295393" size={22} style={styles.inputIcon} />
+          <TextInput
+            placeholder="Email"
+            placeholderTextColor="#888"
+            style={styles.input}
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
+        </View>
+        <Text style={styles.label}>Password</Text>
+        <View style={styles.inputWrapper}>
+          <Lock color="#295393" size={22} style={styles.inputIcon} />
+          <TextInput
+            placeholder="Password"
+            placeholderTextColor="#888"
+            style={styles.input}
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry={!showPassword}
+          />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            {showPassword ? (
+              <EyeOff color="#888" size={22} style={styles.eyeIcon} />
+            ) : (
+              <Eye color="#888" size={22} style={styles.eyeIcon} />
+            )}
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          style={[styles.button, (!email || !password) && { backgroundColor: '#888' }]}
+          onPress={handleLogin}
+          disabled={!email || !password}
+        >
+          <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-          <Text style={styles.link}>Don't have an account? Sign up now</Text>
+          <Text style={styles.link}>Don't have an account? Sign in</Text>
         </TouchableOpacity>
       </View>
-    </ImageBackground>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
-  background: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  overlay: { ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.7)' },
-  container: { width: '80%', backgroundColor: '#222', padding: 20, borderRadius: 10 },
-  title: { fontSize: 24, fontWeight: 'bold', color: 'white', marginBottom: 20, textAlign: 'center' },
-  input: { backgroundColor: '#333', color: 'white', padding: 10, marginBottom: 15, borderRadius: 5 },
-  button: { backgroundColor: '#6366F1', padding: 15, borderRadius: 5, alignItems: 'center' },
-  buttonText: { color: 'white', fontWeight: 'bold' },
-  link: { color: '#6366F1', marginTop: 15, textAlign: 'center' },
+  logoContainer: {
+    alignItems: 'center',
+    marginTop: 60,
+    marginBottom: 10,
+  },
+  logo: {
+    width: 90,
+    height: 90,
+    marginBottom: 5,
+  },
+  logoText: {
+    color: '#222',
+    fontWeight: 'bold',
+    fontSize: 20,
+    letterSpacing: 1,
+    marginBottom: 10,
+  },
+  card: {
+    flex: 1,
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    padding: 30,
+    paddingTop: 40,
+    alignItems: 'stretch',
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 10,
+  },
+  loginTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#223263',
+    marginBottom: 25,
+    marginTop: 10,
+  },
+  label: {
+    color: '#223263',
+    fontWeight: 'bold',
+    marginBottom: 5,
+    marginTop: 10,
+    fontSize: 16,
+  },
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#F4F4F4',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: '#D1D5DB',
+    marginBottom: 10,
+    paddingHorizontal: 10,
+  },
+  inputIcon: {
+    marginRight: 8,
+  },
+  input: {
+    flex: 1,
+    height: 48,
+    color: '#223263',
+    fontSize: 16,
+  },
+  eyeIcon: {
+    marginLeft: 8,
+  },
+  button: {
+    backgroundColor: '#295393',
+    paddingVertical: 15,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  link: {
+    color: '#223263',
+    marginTop: 18,
+    textAlign: 'center',
+    fontSize: 15,
+    textDecorationLine: 'underline',
+  },
+  errorText: {
+    color: '#f5365c',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
 });
 
 export default LoginPage;

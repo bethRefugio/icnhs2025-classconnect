@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "Brgy. Bunawan",
+    "name": "ClassConnect",
     "slug": "your-app-slug",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/logo_enhanced.png",
+    "icon": "./assets/classconnect_no_bg.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/logo_enhanced.png",
+      "image": "./assets/classconnect_no_bg.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,13 +20,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo_enhanced.png",
+        "foregroundImage": "./assets/classconnect_no_bg.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.yourcompany.yourappname"
     },
     "web": {
-      "favicon": "./assets/logo_enhanced.png"
+      "favicon": "./assets/classconnect_no_bg.png"
     }
   }
 }
