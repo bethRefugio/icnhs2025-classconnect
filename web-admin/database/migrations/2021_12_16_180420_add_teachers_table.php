@@ -18,6 +18,7 @@ class AddTeachersTable extends Migration
           $table->foreignId('user_id')->nullable()->constrained('users'); // added by
           $table->foreignId('room_id')->nullable()->constrained('classrooms');
           $table->foreignId('department_id')->nullable()->constrained('departments');
+          $table->foreignId('building_id')->nullable()->constrained('buildings');
           $table->string('name', 100);
           $table->string('email')->nullable();
           $table->string('contact_no')->nullable();

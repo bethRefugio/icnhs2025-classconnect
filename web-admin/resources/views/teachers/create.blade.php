@@ -34,10 +34,10 @@
                                 @include('alerts.feedback', ['field' => 'building_id'])
                             </div>
 
-                            <div class="form-group{{ $errors->has('classroom_id') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('room_id') ? ' has-danger' : '' }}">
                                 <label>{{ _('Classroom') }} <span id="load-classrooms-spinner"></span> </label>
                                 <span id="load_classroom">
-                                  <select name="classroom_id" class="form-control">
+                                  <select name="room_id" class="form-control">
                                     <option value=""> --- Select --- </option>
                                     @php /*
                                     @foreach ($classrooms as $classroom)
@@ -46,7 +46,7 @@
                                     */ @endphp
                                   </select>
                                 </span>
-                                @include('alerts.feedback', ['field' => 'classroom_id'])
+                                @include('alerts.feedback', ['field' => 'room_id'])
                             </div>
 
                             <div class="form-group{{ $errors->has('department_id') ? ' has-danger' : '' }}">
@@ -66,7 +66,7 @@
                                 @include('alerts.feedback', ['field' => 'email'])
                             </div>
 
-                            <div class="form-group{{ $errors->has('mobile_no') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('contact_no') ? ' has-danger' : '' }}">
                                 <label>{{ _('Contact Number') }}</label>
                                 <input type="text" name="contact_no" class="form-control{{ $errors->has('contact_no') ? ' is-invalid' : '' }}" placeholder="{{ _('Enter contact number') }}" value="{{ old('contact_no', '') }}">
                                 @include('alerts.feedback', ['field' => 'contact_no'])

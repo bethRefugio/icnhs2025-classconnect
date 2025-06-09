@@ -60,7 +60,7 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        return Teacher::where('classroom_id',$classroom_id)->get();
+        return Teacher::where('room_id',$room_id)->get();
         return Teacher::where('department_id',$department_id)->get();
         return Teacher::where('building_id',$building_id)->get();
     }
@@ -85,7 +85,6 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        $teacher = Teacher::findOrFail($id);
         $teacher->update($request->all());
         return \Redirect::to('teacher')->withStatus(__('Teacher successfully updated.'));
     

@@ -18,36 +18,40 @@
                              <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                 <label>{{ _('Fullname') }}</label>
                                 <input type="text" name="name" class="form-control" required value="{{ old('name', $teacher->name) }}">
-                                @include('alerts.feedback', ['field' => name'])
+                                @include('alerts.feedback', ['field' => 'name'])
                             </div>
                             
                             <div class="form-group{{ $errors->has('building_id') ? ' has-danger' : '' }}">
                                 <label>{{ _('Building') }}</label>
                                 <select name="building_id" class="form-control">
                                   @foreach ($buildings as $building)
-                                    <option value="{{ $building->id }}">{{ $building->name }}</option>
+                                    <option value="{{ $building->id }}" {{ old('building_id', $teacher->building_id) == $building->id ? 'selected' : '' }}>
+                                      {{ $building->name }}
+                                    </option>
                                   @endforeach
                                 </select>
                                 @include('alerts.feedback', ['field' => 'building_id'])
                             </div>
 
-                            <div class="form-group{{ $errors->has('classroom_id') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('room_id') ? ' has-danger' : '' }}">
                                 <label>{{ _('Classroom') }} </label>
-                                  <select name="classroom_id" class="form-control">
+                                  <select name="room_id" class="form-control">
                                     @php /*
                                     @foreach ($classrooms as $classroom)
                                       <option value="{{ $classroom->id }}">{{ $classroom->room_no }}</option>
                                     @endforeach
                                     */ @endphp
                                   </select>
-                                @include('alerts.feedback', ['field' => 'classroom_id'])
+                                @include('alerts.feedback', ['field' => 'room_id'])
                             </div>
 
                             <div class="form-group{{ $errors->has('department_id') ? ' has-danger' : '' }}">
                                 <label>{{ _('Department') }}</label>
                                 <select name="department_id" class="form-control">
                                   @foreach ($departments as $department)
-                                    <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                    <option value="{{ $department->id }}" {{ old('department_id', $teacher->department_id) == $department->id ? 'selected' : '' }}>
+                                      {{ $department->name }}
+                                    </option>
                                   @endforeach
                                 </select>
                                 @include('alerts.feedback', ['field' => 'department_id'])
