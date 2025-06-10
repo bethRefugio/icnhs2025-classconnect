@@ -15,7 +15,7 @@ class AddTeachersTable extends Migration
     {
       Schema::create('teachers', function (Blueprint $table) {
           $table->id();
-          $table->foreignId('account_id')->nullable()->constrained('accounts'); // added by
+          $table->foreignId('user_id')->nullable()->constrained('users'); // added by
           $table->foreignId('department_id')->nullable()->constrained('departments');
           $table->string('name', 100);
           $table->string('email')->nullable();

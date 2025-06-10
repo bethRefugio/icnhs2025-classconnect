@@ -20,23 +20,12 @@ class TeacherSeeder extends Seeder
             'name' => 'Myrna Acuba',
             'email' => 'mariacorazonalegria.abitago@deped.gov.ph',
             'contact_no' => '09672295909',
-            'account_id' => 4,
+            'user_id' => 1,
             'department_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);
 
-        DB::table('teachers')->insert([
-            'id' => 1,
-            'name' => 'Myrna Acuba',
-            'email' => 'mariacorazonalegria.abitago@deped.gov.ph',
-            'contact_no' => '09672295909',
-            'account_id' => 4,
-            'department_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        
+             
     }
 }
