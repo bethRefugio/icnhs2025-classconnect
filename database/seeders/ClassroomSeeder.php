@@ -137,6 +137,9 @@ class ClassroomSeeder extends Seeder
         ]);
         
 
+
+
+
         DB::table('classrooms')->insert([
             'id' => 16,
             'room_no' => 'Room 1',
@@ -163,6 +166,132 @@ class ClassroomSeeder extends Seeder
         ]);
         DB::table('classrooms')->insert([
             'id' => 19,
+            'room_no' => 'Room 4',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 20,
+            'room_no' => 'Room 5',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 21,
+            'room_no' => 'Room 6',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 22,
+            'room_no' => 'Room 7',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 23,
+            'room_no' => 'Room 8',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 24,
+            'room_no' => 'Room 9',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 25,
+            'room_no' => 'Room 10',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 26,
+            'room_no' => 'Room 11',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 27,
+            'room_no' => 'Room 12',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 28,
+            'room_no' => 'Room 13',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 29,
+            'room_no' => 'Room 14',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 30,
+            'room_no' => 'Room 15',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        
+
+
+        
+
+        DB::table('classrooms')->insert([
+            'id' => 31,
+            'room_no' => 'Room 1',
+            'name' => '',
+            'building_id' => 3,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+         DB::table('classrooms')->insert([
+            'id' => 32,
+            'room_no' => 'Room 2',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+         DB::table('classrooms')->insert([
+            'id' => 33,
+            'room_no' => 'Room 3',
+            'name' => '',
+            'building_id' => 2,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+        DB::table('classrooms')->insert([
+            'id' => 34,
             'room_no' => 'Room 4',
             'name' => '',
             'building_id' => 2,

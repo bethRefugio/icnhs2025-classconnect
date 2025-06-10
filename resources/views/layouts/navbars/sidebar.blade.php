@@ -129,6 +129,32 @@
                 </div>
             </li>
 
+            
+            <li>
+                <a data-toggle="collapse" href="#subject-div" aria-expanded="true">
+                    <i class="tim-icons icon-tablet-2"></i>
+                    <span class="nav-link-text" >{{ __('Subjects') }}</span>
+                    <b class="caret mt-1"></b>
+                </a>
+
+                <div class="collapse {{ $pageParent == 'Subject' ? 'show' : '' }}" id="subject-div">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug == 'subjects') class="active " @endif>
+                            <a href="{{ route('subject.index') }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>{{ _('List of subjects') }}</p>
+                            </a>
+                        </li>
+                        <li @if ($pageSlug == 'addSubject') class="active " @endif>
+                            <a href="{{ route('subject.create')  }}">
+                                <i class="tim-icons icon-simple-add"></i>
+                                <p>{{ _('Add Department') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
             <li>
                 <a data-toggle="collapse" href="#teacher-div" aria-expanded="true">
                     <i class="tim-icons icon-badge"></i>

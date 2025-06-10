@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Teacher;
+namespace App\Http\Requests\Subject;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,10 +24,7 @@ class Store extends FormRequest
     public function rules()
     {
       return [
-        'name' => ['required', 'string'],
-        'email' => ['required', 'string'],
-        'contact_no' => ['required', 'string'],
-        'department_id' => ['required', 'integer'],
+        'subject_name' => ['required', 'string'],
       ];
     }
 

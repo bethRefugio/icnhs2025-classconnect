@@ -21,6 +21,7 @@
                                 @include('alerts.feedback', ['field' => 'name'])
                             </div>
                             
+                            {{--
                             <div class="form-group{{ $errors->has('building_id') ? ' has-danger' : '' }}">
                                 <label>{{ _('Building') }}</label>
                                 <select name="building_id" class="form-control">
@@ -31,7 +32,8 @@
                                   @endforeach
                                 </select>
                                 @include('alerts.feedback', ['field' => 'building_id'])
-                            </div>
+                            </div> 
+                            
 
                             <div class="form-group{{ $errors->has('room_id') ? ' has-danger' : '' }}">
                                 <label>{{ _('Classroom') }} </label>
@@ -44,6 +46,7 @@
                                   </select>
                                 @include('alerts.feedback', ['field' => 'room_id'])
                             </div>
+                            --}}
 
                             <div class="form-group{{ $errors->has('department_id') ? ' has-danger' : '' }}">
                                 <label>{{ _('Department') }}</label>

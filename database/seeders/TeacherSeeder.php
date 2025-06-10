@@ -17,13 +17,22 @@ class TeacherSeeder extends Seeder
     {
         DB::table('teachers')->insert([
             'id' => 1,
-            'name' => 'Maria Theresa',
-            'email' => 'mariatheresa.bolongan@gmail.com',
-            'contact_no' => '09263807125',
-            'user_id' => 1,
-            'room_id' => 1,
-            'department_id' => 6,
-            'building_id' => 1,
+            'name' => 'Myrna Acuba',
+            'email' => 'mariacorazonalegria.abitago@deped.gov.ph',
+            'contact_no' => '09672295909',
+            'account_id' => 4,
+            'department_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
+
+        DB::table('teachers')->insert([
+            'id' => 1,
+            'name' => 'Myrna Acuba',
+            'email' => 'mariacorazonalegria.abitago@deped.gov.ph',
+            'contact_no' => '09672295909',
+            'account_id' => 4,
+            'department_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
         ]);

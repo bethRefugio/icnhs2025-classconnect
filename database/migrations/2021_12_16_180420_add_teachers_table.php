@@ -15,15 +15,12 @@ class AddTeachersTable extends Migration
     {
       Schema::create('teachers', function (Blueprint $table) {
           $table->id();
-          $table->foreignId('user_id')->nullable()->constrained('users'); // added by
-          $table->foreignId('room_id')->nullable()->constrained('classrooms');
+          $table->foreignId('account_id')->nullable()->constrained('accounts'); // added by
           $table->foreignId('department_id')->nullable()->constrained('departments');
-          $table->foreignId('building_id')->nullable()->constrained('buildings');
           $table->string('name', 100);
           $table->string('email')->nullable();
           $table->string('contact_no')->nullable();
           $table->string('profile_pic')->nullable();
-          $table->string('vacant_time', 10)->nullable();
           $table->timestamps();
           $table->softDeletes($column = 'deleted_at', $precision = 0);
       });

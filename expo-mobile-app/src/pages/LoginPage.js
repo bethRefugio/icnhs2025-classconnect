@@ -13,7 +13,7 @@ const LoginPage = ({ navigation, onLogin }) => {
   const handleLogin = async () => {
     setError('');
     try {
-      const response = await axios.post('http://192.168.137.1/api/doLogin', { email, password });
+      const response = await axios.post('http://192.168.73.232/api/doLogin', { email, password });
       if (response.status === 200) {
         const { userId } = response.data;
         await AsyncStorage.setItem('userId', String(userId));

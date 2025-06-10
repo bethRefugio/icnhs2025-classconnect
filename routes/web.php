@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('teacher', 'App\Http\Controllers\Web\TeacherController')->middleware('role:administrator|staff');
 	Route::resource('school', 'App\Http\Controllers\Web\SchoolController')->middleware('role:administrator|staff');
 	Route::resource('department', 'App\Http\Controllers\Web\DepartmentController')->middleware('role:administrator|staff');
+	Route::resource('subject', 'App\Http\Controllers\Web\SubjectController')->middleware('role:administrator|staff');
 	Route::resource('building', 'App\Http\Controllers\Web\BuildingController')->middleware('role:administrator|staff');
 	Route::resource('classroom', 'App\Http\Controllers\Web\ClassroomController')->middleware('role:administrator|staff');
 	Route::resource('parent', 'App\Http\Controllers\Web\ParentController')->middleware('role:administrator|staff');

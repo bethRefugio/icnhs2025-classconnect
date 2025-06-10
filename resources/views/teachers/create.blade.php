@@ -21,6 +21,7 @@
                                 @include('alerts.feedback', ['field' => 'name'])
                             </div>
                             
+                            {{-- 
                             <div class="form-group{{ $errors->has('building_id') ? ' has-danger' : '' }}">
                                 <label>{{ _('Building') }}</label>
                                 <span id="load_building">
@@ -33,21 +34,9 @@
                                 </span>
                                 @include('alerts.feedback', ['field' => 'building_id'])
                             </div>
-
-                            <div class="form-group{{ $errors->has('room_id') ? ' has-danger' : '' }}">
-                                <label>{{ _('Classroom') }} <span id="load-classrooms-spinner"></span> </label>
-                                <span id="load_classroom">
-                                  <select name="room_id" class="form-control">
-                                    <option value=""> --- Select --- </option>
-                                    @php /*
-                                    @foreach ($classrooms as $classroom)
-                                      <option value="{{ $classroom->id }}">{{ $classroom->room_no }}</option>
-                                    @endforeach
-                                    */ @endphp
-                                  </select>
-                                </span>
-                                @include('alerts.feedback', ['field' => 'room_id'])
-                            </div>
+                            --}}
+                         
+                            
 
                             <div class="form-group{{ $errors->has('department_id') ? ' has-danger' : '' }}">
                                 <label>{{ _('Department') }}</label>
