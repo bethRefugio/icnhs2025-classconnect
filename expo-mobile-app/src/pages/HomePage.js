@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ScrollView,
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { Ionicons, MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icons';
-import TeachersListPage from './TeachersListPage';
+import TeachersListPage from './Teachers/TeachersListPage';
 
 const HomePage = ({ navigation }) => {
   const [user, setUser] = useState(null);

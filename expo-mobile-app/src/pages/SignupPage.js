@@ -7,7 +7,7 @@ const SignupPage = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [accountType, setAccountType] = useState('Resident');
+  const [accountType, setAccountType] = useState('');
 
   const handleSignup = async () => {
     try {

@@ -18,10 +18,6 @@ const LoginPage = ({ navigation, onLogin }) => {
         const { user_id } = response.data;
         await AsyncStorage.setItem('userId', String(user_id));
         onLogin();
-        navigation.reset({
-          index: 0,
-          routes: [{ name: 'ResidentTabs' }],
-        });
       }
     } catch (error) {
       const msg = error.response?.data?.message || 'Invalid email or password';

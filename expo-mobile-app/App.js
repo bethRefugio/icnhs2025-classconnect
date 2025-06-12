@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoginPage from './src/pages/LoginPage';
 import SignupPage from './src/pages/SignupPage';
 import HomePage from './src/pages/HomePage';
-import TeachersListPage from './src/pages/TeachersListPage';
+import TeachersListPage from './src/pages/Teachers/TeachersListPage';
 import ProjectsPage from './src/pages/ProjectsPage';
 import RequestPage from './src/pages/RequestPage';
 import AnnouncementsPage from './src/pages/AnnouncementsPage';
@@ -114,7 +114,7 @@ export default function App() {
             <Stack.Screen
               name="TeachersListPage"
               component={TeachersListPage}
-              options={{ headerShown: true, title: 'Teachers' }}
+              options={{ headerShown: false, title: 'Teachers' }}
             />
           </>
         )}
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f8ff',
     paddingHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 10,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     marginRight: 12,
   },
   headerText: {
-    color: 'gray',
+    color: '#fff',
     fontSize: 20,
     fontWeight: 'bold',
     paddingTop: 5,
