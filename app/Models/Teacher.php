@@ -17,14 +17,15 @@ class Teacher extends Model
      */
     protected $fillable = [
         'name',
-        'user_id',
-        'building_id',
-        'room_id',
-        'department_id',
         'email',
         'contact_no',
         'vacant_time',
+        'vacant_day',
         'profile_pic',
+        'user_id',
+        'department_id',
+        'room_id',
+        
     ];
 
     /**
@@ -56,7 +57,7 @@ class Teacher extends Model
      */
     public function classroom()
     {
-        return $this->belongsTo(Classroom::class);
+        return $this->belongsTo(Classroom::class, 'room_id');
     }
 
     public function subjects()

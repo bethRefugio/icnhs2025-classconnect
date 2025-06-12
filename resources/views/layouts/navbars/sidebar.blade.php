@@ -148,7 +148,7 @@
                         <li @if ($pageSlug == 'addSubject') class="active " @endif>
                             <a href="{{ route('subject.create')  }}">
                                 <i class="tim-icons icon-simple-add"></i>
-                                <p>{{ _('Add Department') }}</p>
+                                <p>{{ _('Add Subject') }}</p>
                             </a>
                         </li>
                     </ul>

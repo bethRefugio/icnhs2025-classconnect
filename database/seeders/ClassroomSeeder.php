@@ -8,264 +8,42 @@ use Illuminate\Support\Facades\DB;
 
 class ClassroomSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
-        DB::table('classrooms')->insert([
-            'id' => 1,
-            'room_no' => 'Room 1',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-         DB::table('classrooms')->insert([
-            'id' => 2,
-            'room_no' => 'Room 2',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-         DB::table('classrooms')->insert([
-            'id' => 3,
-            'room_no' => 'Room 3',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 4,
-            'room_no' => 'Room 4',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 5,
-            'room_no' => 'Room 5',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 6,
-            'room_no' => 'Room 6',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 7,
-            'room_no' => 'Room 7',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 8,
-            'room_no' => 'Room 8',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 9,
-            'room_no' => 'Room 9',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 10,
-            'room_no' => 'Room 10',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 11,
-            'room_no' => 'Room 11',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 12,
-            'room_no' => 'Room 12',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 13,
-            'room_no' => 'Room 13',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 14,
-            'room_no' => 'Room 14',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 15,
-            'room_no' => 'Room 15',
-            'name' => '',
-            'building_id' => 1,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        
+        // Get all buildings from the database
+        $buildings = DB::table('buildings')->get();
 
+        $rooms_per_building = 15;
+        $floors = [
+            1 => [1,2,3,4,5],
+            2 => [6,7,8,9,10],
+            3 => [11,12,13,14,15],
+        ];
 
+        // Start classroom IDs at 1 (or get the max from DB if you want to append)
+        $classroomId = 1;
 
-
-        DB::table('classrooms')->insert([
-            'id' => 16,
-            'room_no' => 'Room 1',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-         DB::table('classrooms')->insert([
-            'id' => 17,
-            'room_no' => 'Room 2',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-         DB::table('classrooms')->insert([
-            'id' => 18,
-            'room_no' => 'Room 3',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 19,
-            'room_no' => 'Room 4',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 20,
-            'room_no' => 'Room 5',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 21,
-            'room_no' => 'Room 6',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 22,
-            'room_no' => 'Room 7',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 23,
-            'room_no' => 'Room 8',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 24,
-            'room_no' => 'Room 9',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 25,
-            'room_no' => 'Room 10',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 26,
-            'room_no' => 'Room 11',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 27,
-            'room_no' => 'Room 12',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 28,
-            'room_no' => 'Room 13',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 29,
-            'room_no' => 'Room 14',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('classrooms')->insert([
-            'id' => 30,
-            'room_no' => 'Room 15',
-            'name' => '',
-            'building_id' => 2,
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-
-        
-
-
-        
-
-      
+        foreach ($buildings as $building) {
+            for ($room = 1; $room <= $rooms_per_building; $room++) {
+                // Determine floor number based on room number
+                $floor_no = 1;
+                foreach ($floors as $floor => $room_numbers) {
+                    if (in_array($room, $room_numbers)) {
+                        $floor_no = $floor;
+                        break;
+                    }
+                }
+                DB::table('classrooms')->insert([
+                    'id' => $classroomId,
+                    'room_no' => 'Room ' . $room,
+                    'name' => '',
+                    'floor_no' => $floor_no,
+                    'building_id' => $building->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+                $classroomId++;
+            }
+        }
     }
 }

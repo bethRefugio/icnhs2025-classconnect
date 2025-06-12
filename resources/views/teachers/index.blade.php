@@ -27,6 +27,8 @@
                   <th scope="col">Fullname</th>
                   <th scope="col">Email</th>
                   <th scope="col">Contact Number</th>
+                  <th scope="col">Subject</th>
+                  <th scope="col">Vacant Time</th>
                   <th scope="col">Department</th>
                   <th scope="col">Classroom</th>
                   <th scope="col">Building</th>
@@ -40,16 +42,32 @@
                     <td>{{ $teacher->name }}</td>
                     <td>{{ $teacher->email }}</td>
                     <td>{{ $teacher->contact_no }}</td>
-                    <td>{{ $teacher->department->name }}</td>
                     <td>
-                      @if( isset($teacher->classroom->name) )
-                        {{  $teacher->classroom->name }}
-                      @endif()
+                      @if($teacher->subjects->count())
+                        @foreach($teacher->subjects as $subject)
+                          <span class="badge badge-info">{{ $subject->subject_name }}</span>
+                        @endforeach
+                      @else
+                        <span class="text-muted">None</span>
+                      @endif
                     </td>
                     <td>
-                      @if( isset($teacher->building->name) )
-                        {{  $teacher->building->name }}
-                      @endif()
+                      @if($teacher->vacant_time)
+                        {{ $teacher->vacant_time }}
+                      @else
+                        <span class="text-muted">Not specified</span>
+                      @endif
+                    </td>
+                    <td>{{ $teacher->department->name }}</td>
+                    <td>
+                      @if($teacher->classroom)
+                        {{ $teacher->classroom->room_no }}
+                      @endif
+                    </td>
+                    <td>
+                      @if($teacher->classroom && $teacher->classroom->building)
+                        {{ $teacher->classroom->building->name }}
+                      @endif
                     </td>
                     <td class="text-right">
                         <div class="dropdown">

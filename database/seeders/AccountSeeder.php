@@ -16,8 +16,9 @@ class AccountSeeder extends Seeder
     public function run()
     {
         DB::table('accounts')->insert([ 'id' => 1, 'name' => 'Administrator', 'created_at' => now(), 'updated_at' => now() ]);
-        DB::table('accounts')->insert([ 'id' => 2, 'name' => 'Staff', 'created_at' => now(), 'updated_at' => now() ]);
+        DB::table('accounts')->insert([ 'id' => 2, 'name' => 'Teacher', 'created_at' => now(), 'updated_at' => now() ]);
         DB::table('accounts')->insert([ 'id' => 3, 'name' => 'Parent', 'created_at' => now(), 'updated_at' => now() ]);
-        DB::table('accounts')->insert([ 'id' => 4, 'name' => 'Teacher', 'created_at' => now(), 'updated_at' => now() ]);
+        DB::table('accounts')->insert([ 'id' => 4, 'name' => 'Student', 'created_at' => now(), 'updated_at' => now() ]);
+        DB::table('accounts')->insert([ 'id' => 5, 'name' => 'Staff', 'created_at' => now(), 'updated_at' => now() ]);
     }
 }

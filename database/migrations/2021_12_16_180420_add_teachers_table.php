@@ -17,10 +17,13 @@ class AddTeachersTable extends Migration
           $table->id();
           $table->foreignId('user_id')->nullable()->constrained('users'); // added by
           $table->foreignId('department_id')->nullable()->constrained('departments');
+          $table->foreignId('room_id')->nullable()->constrained('classrooms');
           $table->string('name', 100);
           $table->string('email')->nullable();
           $table->string('contact_no')->nullable();
           $table->string('profile_pic')->nullable();
+          $table->string('vacant_time')->nullable();
+          $table->string('vacant_day')->nullable();
           $table->timestamps();
           $table->softDeletes($column = 'deleted_at', $precision = 0);
       });

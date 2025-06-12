@@ -72,7 +72,7 @@ class LoginController extends Controller
             $user = \Auth::user();
             return response()->json([
                 'success' => true,
-                'userId' => $user->id,
+                'user_id' => $user->id,
                 'user' => $user,
             ]);
         } else {

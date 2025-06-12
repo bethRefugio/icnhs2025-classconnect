@@ -17,10 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('subject_id')->nullable()->constrained('subjects');
             $table->foreignId('teacher_id')->nullable()->constrained('teachers');
-            $table->foreignId('building_id')->nullable()->constrained('buildings');
-            $table->foreignId('room_id')->nullable()->constrained('classrooms');
-            $table->string('vacant_time')->nullable();
-            $table->string('vacant_day')->nullable();
             $table->timestamps();
         });
     }

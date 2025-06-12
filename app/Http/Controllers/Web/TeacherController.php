@@ -20,7 +20,7 @@ class TeacherController extends Controller
      */
     public function index(Teacher $model)
     {
-        $teachers = $model->paginate(20);
+        $teachers = $model->with('subjects')->paginate(20);
         return view('teachers.index', ['teachers' => $teachers]);
     }
 
@@ -31,12 +31,10 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teachers.create', [
-                      //'schools' => School::get(),
-                      'buildings' => Building::get(),
-                      'departments' => Department::get(),
-                      'classrooms' => Classroom::get(),
-                    ]);
+        $buildings = Building::get();
+        $departments = Department::get();
+        $classrooms = Classroom::get();
+        return view('teachers.create', compact('buildings', 'departments', 'classrooms'));
     }
 
     /**

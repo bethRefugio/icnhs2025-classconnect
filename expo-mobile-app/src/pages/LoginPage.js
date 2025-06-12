@@ -13,11 +13,15 @@ const LoginPage = ({ navigation, onLogin }) => {
   const handleLogin = async () => {
     setError('');
     try {
-      const response = await axios.post('http://192.168.73.232/api/doLogin', { email, password });
+      const response = await axios.post('http://192.168.73.232:8000/api/apiLogin', { email, password });
       if (response.status === 200) {
-        const { userId } = response.data;
-        await AsyncStorage.setItem('userId', String(userId));
+        const { user_id } = response.data;
+        await AsyncStorage.setItem('userId', String(user_id));
         onLogin();
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'ResidentTabs' }],
+        });
       }
     } catch (error) {
       const msg = error.response?.data?.message || 'Invalid email or password';

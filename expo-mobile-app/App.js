@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import LoginPage from './src/pages/LoginPage';
 import SignupPage from './src/pages/SignupPage';
-import OverviewPage from './src/pages/OverviewPage';
+import OverviewPage from './src/pages/HomePage';
 import OfficialsPage from './src/pages/OfficialsPage';
 import ProjectsPage from './src/pages/ProjectsPage';
 import RequestPage from './src/pages/RequestPage';
@@ -40,7 +40,7 @@ function ResidentTabs({ onLogout }) {
         tabBarIcon: ({ color, size }) => {
           let iconName;
 
-          if (route.name === 'Overview') {
+          if (route.name === 'Home') {
             iconName = 'home';
           } else if (route.name === 'Request') {
             iconName = 'document-text';
@@ -60,7 +60,7 @@ function ResidentTabs({ onLogout }) {
         tabBarInactiveTintColor: 'gray',
       })}
     >
-      <Tab.Screen name="Overview" component={OverviewPage} />
+      <Tab.Screen name="Home" component={HomePage} />
       {/*<Tab.Screen name="Request" component={RequestPage} />*/}
       <Tab.Screen name="Officials" component={OfficialsPage} />
       <Tab.Screen name="Announcements" component={AnnouncementsPage} />

@@ -22,5 +22,6 @@ Route::get('/buildings/{id}', [BuildingController::class, 'show']);
 Route::post('/buildings', [BuildingController::class, 'store']);
 Route::put('/buildings/{id}', [BuildingController::class, 'update']);
 Route::delete('/buildings/{id}', [BuildingController::class, 'destroy']);
-Route::post('/doLogin', [LoginController::class, 'apiLogin']);
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/apiLogin', [\App\Http\Controllers\ApiAuthController::class, 'apiLogin']);
 });

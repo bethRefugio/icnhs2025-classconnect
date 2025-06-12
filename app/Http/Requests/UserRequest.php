@@ -24,17 +24,27 @@ class UserRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {
-        return [
-            'name' => [
-                'required', 'min:3'
-            ],
-            'email' => [
-                'required', 'email', Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
-            ],
-            'password' => [
-                $this->route()->user ? 'required_with:password_confirmation' : 'required', 'nullable', 'confirmed', 'min:6'
-            ],
-        ];
-    }
+{
+    return [
+        'name' => ['required', 'min:3'],
+        'email' => [
+            'nullable', 'email',
+            Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
+        ],
+        'contact_no' => [
+            'nullable',
+            'unique:users,contact_no,' . ($this->route()->user->id ?? 'NULL') . ',id',
+            'regex:/^[0-9\-\+\s\(\)]+$/'
+        ],
+        'password' => [
+            $this->route()->user ? 'required_with:password_confirmation' : 'required', 'nullable', 'confirmed', 'min:6'
+        ],
+        // Custom validation for at least one
+        function ($attribute, $value, $fail) {
+            if (empty($this->email) && empty($this->contact_no)) {
+                $fail('Either email or contact number is required.');
+            }
+        }
+    ];
+}
 }

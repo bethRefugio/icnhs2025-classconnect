@@ -18,115 +18,119 @@ class BuildingSeeder extends Seeder
         DB::table('buildings')->insert([
             'id' => 1,
             'name' => 'Aquino Building',
-            'no_of_floors' => '2',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('buildings')->insert([
             'id' => 2,
             'name' => 'Rizal Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('buildings')->insert([
             'id' => 3,
             'name' => 'Del Pilar Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('buildings')->insert([
             'id' => 4,
             'name' => 'Mabini Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('buildings')->insert([
             'id' => 5,
             'name' => 'Jacinto Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('buildings')->insert([
             'id' => 6,
-            'name' => 'Jas Building',
+            'name' => 'Aguinaldo Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('buildings')->insert([
             'id' => 7,
-            'name' => 'Aguinaldo Building',
+            'name' => 'Dimaporo Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         DB::table('buildings')->insert([
             'id' => 8,
-            'name' => 'TCB Building',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('buildings')->insert([
-            'id' => 9,
-            'name' => 'Dimaporo Building',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        DB::table('buildings')->insert([
-            'id' => 10,
             'name' => 'Luna Building',
+            'no_of_floors' => '3',
+            'created_at' => now(),
+            'updated_at' => now()
+        ])
+        ;DB::table('buildings')->insert([
+            'id' => 9,
+            'name' => 'VARF Building',
+            'no_of_floors' => '3',
+            'created_at' => now(),
+            'updated_at' => now()
+        ])
+        ;DB::table('buildings')->insert([
+            'id' => 10,
+            'name' => 'Senin-Agabon Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ])
         ;DB::table('buildings')->insert([
             'id' => 11,
-            'name' => 'VARF Building',
+            'name' => 'Tomas Cabili Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ])
         ;DB::table('buildings')->insert([
             'id' => 12,
-            'name' => 'Senin-Agabon Building',
+            'name' => 'Lapu-Lapu Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
-        ])
+        ]);
         ;DB::table('buildings')->insert([
             'id' => 13,
-            'name' => 'Tomas Cabili Building',
+            'name' => 'ESEP Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
-        ])
+        ]);
         ;DB::table('buildings')->insert([
             'id' => 14,
-            'name' => 'Lapu-Lapu Building',
+            'name' => 'Jose Abad Santos Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         ;DB::table('buildings')->insert([
             'id' => 15,
-            'name' => 'ESEP Building',
+            'name' => 'Gabriela Silang Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         ;DB::table('buildings')->insert([
             'id' => 16,
-            'name' => 'Jose Abad Santos Building',
+            'name' => 'GOMBURZA Building',
+            'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
         ]);
         ;DB::table('buildings')->insert([
             'id' => 17,
             'name' => 'Canteen',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        ;DB::table('buildings')->insert([
-            'id' => 18,
-            'name' => 'Gabriela Silang Building',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
-        ;DB::table('buildings')->insert([
-            'id' => 19,
-            'name' => 'GOMBURZA Building',
+            'no_of_floors' => '1',
             'created_at' => now(),
             'updated_at' => now()
         ]);

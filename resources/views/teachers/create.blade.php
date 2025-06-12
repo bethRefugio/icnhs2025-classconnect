@@ -21,20 +21,27 @@
                                 @include('alerts.feedback', ['field' => 'name'])
                             </div>
                             
-                            {{-- 
-                            <div class="form-group{{ $errors->has('building_id') ? ' has-danger' : '' }}">
-                                <label>{{ _('Building') }}</label>
-                                <span id="load_building">
-                                  <select name="building_id" id="building_id" class="form-control" onchange="getClassroom($(this))">
-                                    <option value=""> --- Select --- </option>
-                                    @foreach ($buildings as $building)
+                            <div class="form-group">
+                              <label>Building</label>
+                              <select id="building_id" name="building_id" class="form-control">
+                                  <option value="">Select Building</option>
+                                  @foreach($buildings as $building)
                                       <option value="{{ $building->id }}">{{ $building->name }}</option>
-                                    @endforeach
-                                  </select>
-                                </span>
-                                @include('alerts.feedback', ['field' => 'building_id'])
-                            </div>
-                            --}}
+                                  @endforeach
+                              </select>
+                          </div>
+                          <div class="form-group">
+                              <label>Floor</label>
+                              <select id="floor_no" class="form-control">
+                                  <option value="">Select Floor</option>
+                              </select>
+                          </div>
+                          <div class="form-group">
+                              <label>Room</label>
+                              <select id="room_id" name="room_id" class="form-control">
+                                  <option value="">Select Room</option>
+                              </select>
+                          </div>
                          
                             
 
@@ -73,8 +80,60 @@
 
         </div>
     </div>
+    
+    <script>
+const classrooms = @json($classrooms);
+const buildings = @json($buildings);
+console.log('buildings:', buildings);
+console.log('classrooms:', classrooms);
 
+document.addEventListener('DOMContentLoaded', function() {
+  const buildingSelect = document.getElementById('building_id');
+  const floorSelect = document.getElementById('floor_no');
+  const roomSelect = document.getElementById('room_id');
 
+  if (buildingSelect) {
+    buildingSelect.addEventListener('change', function() {
+      let buildingId = this.value;
+      let building = buildings.find(b => String(b.id) === String(buildingId));
+      floorSelect.innerHTML = '<option value="">Select Floor</option>';
+      roomSelect.innerHTML = '<option value="">Select Room</option>';
+      if (building && building.no_of_floors) {
+        for (let i = 1; i <= parseInt(building.no_of_floors); i++) {
+          floorSelect.innerHTML += `<option value="${i}">${i}</option>`;
+        }
+      }
+      // Debug: log selected building
+      console.log('Selected building:', building ? building.name : 'None', 'ID:', buildingId);
+    });
+  }
+
+  if (floorSelect) {
+    floorSelect.addEventListener('change', function() {
+      let buildingId = buildingSelect.value;
+      let floorNo = this.value;
+      let rooms = classrooms.filter(
+        c => String(c.building_id) === String(buildingId) && String(c.floor_no) === String(floorNo)
+      );
+      roomSelect.innerHTML = '<option value="">Select Room</option>';
+      rooms.forEach(room => {
+        roomSelect.innerHTML += `<option value="${room.id}">${room.room_no}</option>`;
+      });
+      // Debug: log selected floor
+      console.log('Selected floor_no:', floorNo, 'in building ID:', buildingId);
+    });
+  }
+
+  if (roomSelect) {
+    roomSelect.addEventListener('change', function() {
+      let roomId = this.value;
+      let room = classrooms.find(r => String(r.id) === String(roomId));
+      // Debug: log selected room
+      console.log('Selected room:', room ? room.room_no : 'None', 'ID:', roomId);
+    });
+  }
+});
+</script>
     <script src="{{ config('app.url') }}/js/vanilla.js"></script>
     
 @endsection

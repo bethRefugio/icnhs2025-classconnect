@@ -27,7 +27,10 @@ class Store extends FormRequest
         'name' => ['required', 'string'],
         'email' => ['required', 'string'],
         'contact_no' => ['required', 'string'],
+        'vacant_time' => [ 'string'],
+        'vacant_day' => ['string'],
         'department_id' => ['required', 'integer'],
+        'room_id' => ['required', 'integer', 'exists:classrooms,id'],
       ];
     }
 

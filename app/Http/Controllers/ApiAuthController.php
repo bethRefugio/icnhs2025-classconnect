@@ -40,4 +40,27 @@ class ApiAuthController extends Controller
             ], 401);
         }
     }
+
+    public function apiLogin(Request $request)
+    {
+        $login = [
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+            'is_allowed_login' => true
+        ];
+
+        if (\Auth::attempt($login)) {
+            $user = \Auth::user();
+            return response()->json([
+                'success' => true,
+                'user_id' => $user->id,
+                'user' => $user,
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Email or Password is incorrect or your account still needs to be checked by the admin!',
+            ], 401);
+        }
+    }
 }
