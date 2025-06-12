@@ -8,8 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import LoginPage from './src/pages/LoginPage';
 import SignupPage from './src/pages/SignupPage';
-import OverviewPage from './src/pages/HomePage';
-import OfficialsPage from './src/pages/OfficialsPage';
+import HomePage from './src/pages/HomePage';
+import TeachersListPage from './src/pages/TeachersListPage';
 import ProjectsPage from './src/pages/ProjectsPage';
 import RequestPage from './src/pages/RequestPage';
 import AnnouncementsPage from './src/pages/AnnouncementsPage';
@@ -18,54 +18,36 @@ import SettingsPage from './src/pages/SettingsPage';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function Header() {
-  return (
-    <View style={styles.headerContainer}>
-      <Image
-        source={require('./assets/logo_enhanced.png')}
-        style={styles.logo}
-        resizeMode="contain"
-      />
-      <Text style={styles.headerText}>Brgy. Bunawan</Text>
-    </View>
-  );
-}
+
 
 function ResidentTabs({ onLogout }) {
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
-        headerShown: true,
-        header: () => <Header />,
         tabBarIcon: ({ color, size }) => {
           let iconName;
-
-          if (route.name === 'Home') {
-            iconName = 'home';
-          } else if (route.name === 'Request') {
-            iconName = 'document-text';
-          } else if (route.name === 'Officials') {
-            iconName = 'people';
-          } else if (route.name === 'Announcements') {
-            iconName = 'megaphone';
-          } else if (route.name === 'Projects') {
-            iconName = 'briefcase';
-          } else if (route.name === 'Settings') {
-            iconName = 'settings';
-          }
-
+          if (route.name === 'Home') iconName = 'home';
+          else if (route.name === 'Menu') iconName = 'menu';
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         tabBarActiveTintColor: '#6366F1',
         tabBarInactiveTintColor: 'gray',
       })}
     >
-      <Tab.Screen name="Home" component={HomePage} />
-      {/*<Tab.Screen name="Request" component={RequestPage} />*/}
-      <Tab.Screen name="Officials" component={OfficialsPage} />
+      <Tab.Screen
+        name="Home"
+        component={HomePage}
+        options={{ headerShown: false }} // <-- Hide the default header for Home
+      />
+      {/*<Tab.Screen name="Request" component={RequestPage} />
+      <Tab.Screen
+        name="TeachersListPage"
+        component={TeachersListPage}
+        options={{ headerShown: true, title: 'Teachers' }}
+      />
       <Tab.Screen name="Announcements" component={AnnouncementsPage} />
-      <Tab.Screen name="Projects" component={ProjectsPage} />
-      <Tab.Screen name="Settings">
+      <Tab.Screen name="Projects" component={ProjectsPage} />*/}
+      <Tab.Screen name="Menu">
         {(props) => <SettingsPage {...props} onLogout={onLogout} />}
       </Tab.Screen>
     </Tab.Navigator>
@@ -128,6 +110,12 @@ export default function App() {
             >
               {(props) => <ResidentTabs {...props} onLogout={handleLogout} />}
             </Stack.Screen>
+
+            <Stack.Screen
+              name="TeachersListPage"
+              component={TeachersListPage}
+              options={{ headerShown: true, title: 'Teachers' }}
+            />
           </>
         )}
       </Stack.Navigator>
@@ -140,7 +128,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 10,
     justifyContent: 'center',

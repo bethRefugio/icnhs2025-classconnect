@@ -1,82 +1,198 @@
-import React from 'react';
-import { View, Text, ScrollView, StyleSheet, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, ScrollView, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { Ionicons, MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icons';
+import TeachersListPage from './TeachersListPage';
 
-const OverviewPage = () => {
+const HomePage = ({ navigation }) => {
+  const [user, setUser] = useState(null);
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userId = await AsyncStorage.getItem('userId');
+        if (userId) {
+          // Fetch user data from your API
+          const res = await axios.get(`http://192.168.73.232:8000/api/user/${userId}`);
+          setUser(res.data.user);
+        }
+      } catch (err) {
+        Alert.alert('Error', 'Failed to fetch user info');
+      }
+    };
+    fetchUser();
+  }, []);
+
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>Barangay Bunawan</Text>
-      <Text style={styles.subtitle}>City of Iligan</Text>
-      <Text style={styles.description}>
-        Bunawan is a barangay in the city of Iligan. Its population as determined by the 2020 Census was 2,025. This represented 0.56% of the total population of Iligan.
-      </Text>
-
-      <View style={styles.statsContainer}>
-        <View style={[styles.statCard, { backgroundColor: '#6366F1' }]}>
-          <Text style={styles.statName}>Total Population</Text>
-          <Text style={styles.statValue}>2,025</Text>
-          <Text style={styles.statSubtitle}>[2020]</Text>
+      {/* Header */}
+      <View style={styles.header}>
+        <Image
+          source={user?.profile_photo_url ? { uri: user.profile_photo_url } : require('../../assets/default_user.png')}
+          style={styles.avatar}
+        />
+        <View style={{ flex: 1 }}>
+          <Text style={styles.userName}>{user ? user.name : 'Loading...'}</Text>
         </View>
-        <View style={[styles.statCard, { backgroundColor: '#8B5CF6' }]}>
-          <Text style={styles.statName}>Area</Text>
-          <Text style={styles.statValue}>13.15 km²</Text>
-        </View>
-        <View style={[styles.statCard, { backgroundColor: '#EC4899' }]}>
-          <Text style={styles.statName}>Population Density</Text>
-          <Text style={styles.statValue}>153.9/km²</Text>
-          <Text style={styles.statSubtitle}>[2020]</Text>
-        </View>
-        <View style={[styles.statCard, { backgroundColor: '#10B981' }]}>
-          <Text style={styles.statName}>Annual Population Change</Text>
-          <Text style={styles.statValue}>1.9%</Text>
-          <Text style={styles.statSubtitle}>[2015 → 2020]</Text>
-        </View>
+        <TouchableOpacity style={styles.bellBtn}>
+          <Ionicons name="notifications-outline" size={28} color="#fff" />
+        </TouchableOpacity>
       </View>
 
-      <View style={styles.summaryContainer}>
-        <Text style={styles.summaryTitle}>Summary Data</Text>
-        <Text style={styles.summaryItem}>Type: Barangay</Text>
-        <Text style={styles.summaryItem}>Island group: Mindanao</Text>
-        <Text style={styles.summaryItem}>Region: Northern Mindanao (Region X)</Text>
-        <Text style={styles.summaryItem}>City: Iligan</Text>
-        <Text style={styles.summaryItem}>Postal code: 9200</Text>
-        <Text style={styles.summaryItem}>Population (2020): 2,025</Text>
-        <Text style={styles.summaryItem}>Coordinates: 8.3023, 124.3028 (8° 18' North, 124° 18' East)</Text>
-        <Text style={styles.summaryItem}>Estimated elevation above sea level: 342.6 meters (1,124.0 feet)</Text>
+      {/* Search */}
+      <View style={styles.searchContainer}>
+        <Ionicons name="search" size={20} color="#888" style={{ marginLeft: 8 }} />
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Search a Teacher"
+          placeholderTextColor="#888"
+          value={search}
+          onChangeText={setSearch}
+        />
       </View>
 
-      <View style={styles.visionMissionContainer}>
-        <Text style={styles.sectionTitle}>Vision</Text>
-        <Text style={styles.sectionText}>
-          Barangay Bunawan envisions a progressive, peaceful, and environmentally sustainable community where residents thrive in a safe and inclusive environment. 
-          We aim to foster unity, economic growth, and social development while preserving our cultural heritage and natural resources.
-        </Text>
-        <Text style={styles.sectionTitle}>Mission</Text>
-        <Text style={styles.sectionText}>
-          Our mission is to provide transparent and efficient governance that empowers every resident of Barangay Bunawan. 
-          We are committed to delivering quality public services, promoting sustainable livelihood programs, ensuring public safety, 
-          and enhancing community welfare through active participation, innovation, and collaboration.
-        </Text>
+      {/* Announcements */}
+      <View style={styles.announcementsContainer}>
+        <Text style={styles.announcementsTitle}>Announcements</Text>
+        <View style={styles.announcementBox} />
+        <View style={styles.announcementBox} />
+      </View>
+
+      {/* Menu Buttons */}
+      <View style={styles.menuGrid}>
+        <MenuButton
+          icon={<MaterialCommunityIcons name="account-group" size={36} color="#295393" />}
+          label="Teachers"
+          color="#C6E6FB"
+          onPress={() => navigation.navigate('TeachersListPage')}
+        />
+        <MenuButton
+          icon={<FontAwesome5 name="calendar-alt" size={32} color="#295393" />}
+          label="Appointments"
+          color="#FFE6A7"
+          onPress={() => navigation.navigate('Appointments')}
+        />
+        <MenuButton
+          icon={<MaterialCommunityIcons name="message-text" size={32} color="#295393" />}
+          label="Messages"
+          color="#E6C6FB"
+          badge={1}
+          onPress={() => navigation.navigate('Messages')}
+        />
+        <MenuButton
+          icon={<Feather name="map-pin" size={32} color="#295393" />}
+          label="Campus Map"
+          color="#F6C6FB"
+          onPress={() => navigation.navigate('CampusMap')}
+        />
+        <MenuButton
+          icon={<Ionicons name="megaphone" size={32} color="#295393" />}
+          label="Announcements"
+          color="#C6F7FB"
+          onPress={() => navigation.navigate('Announcements')}
+        />
+        <MenuButton
+          icon={<Ionicons name="person-circle-outline" size={36} color="#295393" />}
+          label="Account"
+          color="#FFE6A7"
+          onPress={() => navigation.navigate('Settings')}
+        />
       </View>
     </ScrollView>
   );
 };
 
+const MenuButton = ({ icon, label, color, onPress, badge }) => (
+  <TouchableOpacity style={[styles.menuBtn, { backgroundColor: color }]} onPress={onPress}>
+    <View style={{ position: 'relative', alignItems: 'center' }}>
+      {icon}
+      {badge ? (
+        <View style={styles.badge}>
+          <Text style={styles.badgeText}>{badge}</Text>
+        </View>
+      ) : null}
+    </View>
+    <Text style={styles.menuLabel}>{label}</Text>
+  </TouchableOpacity>
+);
+
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#121212' },
-  title: { fontSize: 32, fontWeight: 'bold', color: '#fff', textAlign: 'center', marginBottom: 8 },
-  subtitle: { fontSize: 24, fontWeight: 'bold', color: '#fff', textAlign: 'center', marginBottom: 16 },
-  description: { fontSize: 16, color: '#ccc', textAlign: 'center', marginBottom: 24 },
-  statsContainer: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: 24 },
-  statCard: { width: '48%', borderRadius: 8, padding: 16, marginBottom: 16 },
-  statName: { color: '#fff', fontWeight: 'bold', fontSize: 16, marginBottom: 4 },
-  statValue: { color: '#fff', fontSize: 20, fontWeight: 'bold' },
-  statSubtitle: { color: '#ddd', fontSize: 12 },
-  summaryContainer: { backgroundColor: 'rgba(55, 65, 81, 0.8)', borderRadius: 8, padding: 16, marginBottom: 24 },
-  summaryTitle: { color: '#fff', fontWeight: 'bold', fontSize: 18, marginBottom: 12, textAlign: 'center' },
-  summaryItem: { color: '#ddd', fontSize: 14, marginBottom: 6 },
-  visionMissionContainer: { backgroundColor: 'rgba(55, 65, 81, 0.8)', borderRadius: 8, padding: 16, marginBottom: 24 },
-  sectionTitle: { color: '#fff', fontWeight: 'bold', fontSize: 18, marginBottom: 12, textAlign: 'center' },
-  sectionText: { color: '#ccc', fontSize: 14, textAlign: 'justify', marginBottom: 12 },
+  container: { flex: 1, backgroundColor: '#f5f8ff', paddingTop: 40 },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#295393',
+    padding: 16,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  avatar: { width: 50, height: 50, borderRadius: 25, marginRight: 12, borderWidth: 2, borderColor: '#fff' },
+  userName: { color: '#fff', fontWeight: 'bold', fontSize: 20 },
+  bellBtn: { marginLeft: 'auto', padding: 4 },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    marginHorizontal: 16,
+    marginTop: 16,
+    borderRadius: 10,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+  },
+  searchInput: { flex: 1, height: 40, marginLeft: 8, color: '#222'},
+  announcementsContainer: {
+    backgroundColor: '#F2F4F8',
+    margin: 16,
+    borderRadius: 12,
+    padding: 12,
+  },
+  announcementsTitle: { fontWeight: 'bold', fontSize: 16, marginBottom: 8, color: '#222' },
+  announcementBox: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    height: 50,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#e0e0e0',
+  },
+  menuGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    margin: 16,
+  },
+  menuBtn: {
+    width: '30%',
+    aspectRatio: 1,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 18,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOpacity: 0.07,
+    shadowRadius: 4,
+  },
+  menuLabel: { marginTop: 8, fontWeight: 'bold', color: '#295393', fontSize: 13, textAlign: 'center' },
+  badge: {
+    position: 'absolute',
+    top: -6,
+    right: -10,
+    backgroundColor: '#E53935',
+    borderRadius: 8,
+    paddingHorizontal: 5,
+    paddingVertical: 1,
+    minWidth: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  badgeText: { color: '#fff', fontSize: 10, fontWeight: 'bold' },
 });
 
-export default OverviewPage;
+export default HomePage;
