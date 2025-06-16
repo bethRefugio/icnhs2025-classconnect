@@ -6,10 +6,7 @@ const SettingsPage = ({ navigation, onLogout }) => {
   const handleLogout = async () => {
     await AsyncStorage.removeItem('userId');
     onLogout();
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Login' }],
-    });
+    navigation.navigate('Login');
   };
 
   return (

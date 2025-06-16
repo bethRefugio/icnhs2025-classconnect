@@ -7,13 +7,14 @@ import { View, ActivityIndicator, Image, Text, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import LoginPage from './src/pages/LoginPage';
-import SignupPage from './src/pages/SignupPage';
+import SignupPage from './src/pages/Signin/SignupPage';
 import HomePage from './src/pages/HomePage';
 import TeachersListPage from './src/pages/Teachers/TeachersListPage';
 import ProjectsPage from './src/pages/ProjectsPage';
 import RequestPage from './src/pages/RequestPage';
 import AnnouncementsPage from './src/pages/AnnouncementsPage';
 import SettingsPage from './src/pages/SettingsPage';
+import TeacherSignup from './src/pages/Signin/TeacherSignup';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -100,7 +101,8 @@ export default function App() {
             <Stack.Screen name="Login" options={{ headerShown: false }}>
               {(props) => <LoginPage {...props} onLogin={() => setIsLoggedIn(true)} />}
             </Stack.Screen>
-            <Stack.Screen name="Signup" component={SignupPage} options={{ headerShown: true }} />
+            <Stack.Screen name="SignupPage" component={SignupPage} options={{ headerShown: true }} />
+             <Stack.Screen name="TeacherSignup" component={TeacherSignup} options={{ headerShown: false }} />
           </>
         ) : (
           <>
@@ -116,6 +118,8 @@ export default function App() {
               component={TeachersListPage}
               options={{ headerShown: false, title: 'Teachers' }}
             />
+            <Stack.Screen name="SignupPage" component={SignupPage} options={{ headerShown: false }} />
+            <Stack.Screen name="TeacherSignup" component={TeacherSignup} options={{ headerShown: false }} />
           </>
         )}
       </Stack.Navigator>
