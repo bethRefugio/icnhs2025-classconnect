@@ -1,13 +1,13 @@
-@extends('layouts.app', ['page' => __('Add Staf'), 'pageSlug' => 'addStaff', 'pageParent' => 'Staff'])
+@extends('layouts.app', ['page' => __('Add Parent'), 'pageSlug' => 'addParent', 'pageParent' => 'Parent'])
 
 @section('content')
     <div class="row">
         <div class="col col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">{{ _('Add Staff') }}</h5>
+                    <h5 class="title">{{ _('Add Parent') }}</h5>
                 </div>
-                <form method="post" action="{{ route('staff.store') }}" autocomplete="off">
+                <form method="post" action="{{ route('parent.store') }}" autocomplete="off">
                     <div class="card-body">
                             @csrf
                             @method('post')
@@ -41,7 +41,7 @@
                                 @include('alerts.feedback', ['field' => 'is_allowed_login'])
                             </div>
 
-                            <div class="form-group{{ $errors->has('account_id') ? ' has-danger' : '' }}">
+                            <div class="form-group{{ $errors->has('account_id') ? ' has-danger' : '' }}" style="display:none;">
                                 <label>{{ _('Allowed Login?') }}</label>
                                 <select name="account_id" class="form-control{{ $errors->has('account_id') ? ' is-invalid' : '' }}">
                                     @foreach ($roles as $role)
@@ -56,7 +56,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-fill btn-primary"> <i class="fas fa-save"></i> {{ _('Save') }}</button>
-                        <a href="/staff" class="btn btn-fill btn-default"> <i class="tim-icons icon-simple-remove"></i> {{ _('Close') }}</a>
+                        <a href="/parent" class="btn btn-fill btn-default"> <i class="tim-icons icon-simple-remove"></i> {{ _('Close') }}</a>
                     </div>
                 </form>
             </div>

@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { Ionicons, MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icons';
 import TeachersListPage from './Teachers/TeachersListPage';
+import { API_URL } from '../../config';
 
 const HomePage = ({ navigation }) => {
   const [user, setUser] = useState(null);
@@ -15,7 +16,7 @@ const HomePage = ({ navigation }) => {
         const userId = await AsyncStorage.getItem('userId');
         if (userId) {
           // Fetch user data from your API
-          const res = await axios.get(`http://192.168.73.232:8000/api/user/${userId}`);
+          const res = await axios.get(`${API_URL}/user/${userId}`);
           setUser(res.data.user);
         }
       } catch (err) {

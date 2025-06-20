@@ -84,7 +84,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => Hash::make('student'),
             'is_allowed_login' => true,
-            'account_id' => 3,
+            'account_id' => 4,
             'created_at' => now(),
             'updated_at' => now()
         ]);
@@ -687,6 +687,18 @@ class UsersTableSeeder extends Seeder
             'updated_at' => now()
         ]);
     }
+
+    DB::table('users')->insert([
+            'id' => 120,
+            'name' => 'Student User',
+            'email' => 'student.user@gmail.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('student'),
+            'is_allowed_login' => true,
+            'account_id' => 4,
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
 
     }
 }

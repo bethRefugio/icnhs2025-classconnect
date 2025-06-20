@@ -3,6 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, KeyboardAvo
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react-native';
+import { API_URL } from '../../config';
+
 
 const LoginPage = ({ navigation, onLogin }) => {
   const [email, setEmail] = useState('');
@@ -13,7 +15,7 @@ const LoginPage = ({ navigation, onLogin }) => {
   const handleLogin = async () => {
     setError('');
     try {
-      const response = await axios.post('http://192.168.73.232:8000/api/apiLogin', { email, password });
+      const response = await axios.post(`${API_URL}/apiLogin`, { email, password });
       if (response.status === 200) {
         const { user_id } = response.data;
         await AsyncStorage.setItem('userId', String(user_id));

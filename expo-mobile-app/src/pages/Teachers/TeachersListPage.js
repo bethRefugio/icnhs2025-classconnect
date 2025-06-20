@@ -5,8 +5,8 @@ import DropDownPicker from 'react-native-dropdown-picker';
 import { Ionicons } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native';
 import styles from './styles';
+import { API_URL } from '../../../config'; 
 
-const API_URL = 'http://192.168.73.232:8000/api';
 
 const TeachersListPage = ({navigation}) => {
   const [teachers, setTeachers] = useState([]);

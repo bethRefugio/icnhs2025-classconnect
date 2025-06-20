@@ -28,7 +28,7 @@ class BuildingController extends Controller
      */
     public function create()
     {
-        return view('buildings.create', ['schools' => School::get() ]);
+        return view('buildings.create');
     }
 
     /**
@@ -48,13 +48,12 @@ class BuildingController extends Controller
      *
      * @param  \App\Models\Building  $building
      * @return \Illuminate\Http\Response
-     */
-    //public function show(Building $building)
-    public function show($school_id)
-    {
-        return Building::where('school_id',$school_id)->get();
-    }
-
+     
+     * public function show($school_id)
+     * {
+     *    return Building::where('school_id',$school_id)->get();
+     * }
+    */
     /**
      * Show the form for editing the specified resource.
      *

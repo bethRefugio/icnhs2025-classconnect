@@ -73,7 +73,7 @@ Route::post('/teachers', function (Request $request) {
         'email' => 'required|email',
         'contact_no' => 'nullable|string|max:50',
         'department_id' => 'required|integer|exists:departments,id',
-        'classroom_id' => 'nullable|integer',
+        'room_id' => 'nullable|integer',
     ]);
     $teacher = Teacher::create($validated);
     return response()->json(['teacher' => $teacher]);

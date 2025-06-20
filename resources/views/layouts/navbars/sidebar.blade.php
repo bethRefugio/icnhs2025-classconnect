@@ -210,7 +210,7 @@
             <li>
                 <a data-toggle="collapse" href="#staff-div" aria-expanded="true">
                     <i class="tim-icons icon-badge"></i>
-                    <span class="nav-link-text" >{{ __('Staffs') }}</span>
+                    <span class="nav-link-text" >{{ __('Users') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
 
@@ -219,13 +219,13 @@
                         <li @if ($pageSlug == 'staffs') class="active " @endif>
                             <a href="{{ route('staff.index') }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
-                                <p>{{ _('List of staffs') }}</p>
+                                <p>{{ _('List of Users') }}</p>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('staff.create')  }}">
                                 <i class="tim-icons icon-simple-add"></i>
-                                <p>{{ _('Add Staff') }}</p>
+                                <p>{{ _('Add User') }}</p>
                             </a>
                         </li>
                     </ul>

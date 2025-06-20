@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, ScrollView } from 'react-native';
-import DropDownPicker from 'react-native-dropdown-picker';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import axios from 'axios';
-
-const API_URL = 'http://192.168.73.232:8000/api';
+import { API_URL } from '../../../config';
 
 const TeacherSignup = ({ route, navigation }) => {
   const { account_id } = route.params || {};
@@ -15,25 +14,20 @@ const TeacherSignup = ({ route, navigation }) => {
   const [password, setPassword] = useState('');
 
   // Dropdown state
-  const [department, setDepartment] = useState(null);
   const [departments, setDepartments] = useState([]);
-  const [departmentOpen, setDepartmentOpen] = useState(false);
+  const [department, setDepartment] = useState();
 
-  const [building, setBuilding] = useState(null);
   const [buildings, setBuildings] = useState([]);
-  const [buildingOpen, setBuildingOpen] = useState(false);
+  const [building, setBuilding] = useState();
 
-  const [floor, setFloor] = useState(null);
   const [floors, setFloors] = useState([]);
-  const [floorOpen, setFloorOpen] = useState(false);
+  const [floor, setFloor] = useState();
 
-  const [classroom, setClassroom] = useState(null);
   const [classrooms, setClassrooms] = useState([]);
-  const [classroomOpen, setClassroomOpen] = useState(false);
+  const [classroom, setClassroom] = useState();
 
   const [subjects, setSubjects] = useState([]);
-  const [selectedSubjects, setSelectedSubjects] = useState([]);
-  const [subjectOpen, setSubjectOpen] = useState(false);
+  const [subject, setSubject] = useState();
 
   // Fetch dropdown data
   useEffect(() => {
@@ -45,16 +39,11 @@ const TeacherSignup = ({ route, navigation }) => {
           axios.get(`${API_URL}/buildings`),
           axios.get(`${API_URL}/classrooms`)
         ]);
-        setDepartments(deptRes.data.departments.map(d => ({ label: d.name, value: d.id })));
-        setSubjects(subjRes.data.subjects.map(s => ({ label: s.subject_name || s.name, value: s.id })));
-        setBuildings(bldgRes.data.buildings.map(b => ({
-          label: b.name,
-          value: b.id,
-          no_of_floors: b.no_of_floors
-        })));
+        setDepartments(deptRes.data.departments);
+        setSubjects(subjRes.data.subjects);
+        setBuildings(bldgRes.data.buildings);
         setClassrooms(roomRes.data.classrooms);
       } catch (e) {
-        console.log('Dropdown fetch error:', e.response ? e.response.data : e.message);
         Alert.alert('Error', 'Failed to load dropdown data');
       }
     };
@@ -63,38 +52,45 @@ const TeacherSignup = ({ route, navigation }) => {
 
   // Update floors when building changes
   useEffect(() => {
+    setFloor(undefined);
+    setClassroom(undefined);
     if (building) {
-      const selectedBuilding = buildings.find(b => b.value === building);
-      if (selectedBuilding) {
-        setFloors(Array.from({ length: selectedBuilding.no_of_floors }, (_, i) => ({
-          label: `Floor ${i + 1}`,
-          value: i + 1
-        })));
+      const selectedBuilding = buildings.find(b => String(b.id) === String(building));
+      if (selectedBuilding && selectedBuilding.no_of_floors) {
+        setFloors(Array.from({ length: parseInt(selectedBuilding.no_of_floors) }, (_, i) => (i + 1).toString()));
       } else {
         setFloors([]);
       }
     } else {
       setFloors([]);
     }
-    setFloor(null);
-    setClassroom(null);
-  }, [building]);
+  }, [building, buildings]);
 
-  // Filter classrooms by building and floor
+  // Update classroom when floor changes
+  useEffect(() => {
+    setClassroom(undefined);
+  }, [floor]);
+
+  // Filter classrooms by building and floor (all as strings for safety)
   const filteredClassrooms = classrooms.filter(
-    c => c.building_id === building && c.floor_no === floor
-  ).map(r => ({ label: r.room_no, value: r.id }));
+    c =>
+      String(c.building_id) === String(building) &&
+      String(c.floor_no) === String(floor)
+  );
 
-  // Submit handler
+  // Submit handler (same as before)
   const handleSubmit = async () => {
-    if (!name || !email || !password || !department || !building || !floor || !classroom || selectedSubjects.length === 0) {
+    if (!name || !email || !password || !department || !building || !floor || !classroom || !subject) {
       Alert.alert('Error', 'Please fill all required fields.');
       return;
     }
     try {
       // 1. Register user
       const userRes = await axios.post(`${API_URL}/register`, {
-        name, email, password, account_id
+        name,
+        email,
+        password,
+        account_id, // if needed
       });
       const user_id = userRes.data.user.id;
 
@@ -105,14 +101,14 @@ const TeacherSignup = ({ route, navigation }) => {
         email,
         contact_no: contactNo,
         department_id: department,
-        classroom_id: classroom,
+        room_id: classroom,
       });
       const teacher_id = teacherRes.data.teacher.id;
 
-      // 3. Assign subjects
+      // 3. Assign subjects (if subject is an array, otherwise wrap in array)
       await axios.post(`${API_URL}/subject_teacher`, {
         teacher_id,
-        subject_ids: selectedSubjects,
+        subject_ids: Array.isArray(subject) ? subject : [subject],
       });
 
       Alert.alert('Success', 'Teacher account created!');
@@ -134,92 +130,76 @@ const TeacherSignup = ({ route, navigation }) => {
       <TextInput style={styles.input} value={contactNo} onChangeText={setContactNo} keyboardType="phone-pad" />
 
       <Text style={styles.label}>Department</Text>
-        <View style={{ zIndex: 3000 }}>
-          <DropDownPicker
-            open={departmentOpen}
-            value={department}
-            items={departments}
-            setOpen={setDepartmentOpen}
-            setValue={setDepartment}
-            setItems={setDepartments}
-            placeholder="Select Department"
-            style={styles.dropdown}
-            dropDownContainerStyle={styles.dropdownContainer}
-            listMode="SCROLLVIEW"
-            zIndex={5000}
-          />
-        </View>
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={department}
+          onValueChange={setDepartment}
+          style={styles.pickerStyle}
+        >
+          <Picker.Item label="Select Department" value={undefined} />
+          {departments.map(d => (
+            <Picker.Item label={d.name} value={d.id} key={d.id} />
+          ))}
+        </Picker>
+      </View>
 
       <Text style={styles.label}>Building</Text>
-        <View style={{ zIndex: 3000 }}>
-          <DropDownPicker
-            open={buildingOpen}
-            value={building}
-            items={buildings}
-            setOpen={setBuildingOpen}
-            setValue={setBuilding}
-            setItems={setBuildings}
-            placeholder="Select Building"
-            style={styles.dropdown}
-            dropDownContainerStyle={styles.dropdownContainer}
-            listMode="SCROLLVIEW"
-            zIndex={4000}
-          />
-        </View>
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={building}
+          onValueChange={value => setBuilding(value)}
+          style={styles.pickerStyle}
+        >
+          <Picker.Item label="Select Building" value={undefined} />
+          {buildings.map(b => (
+            <Picker.Item label={b.name} value={b.id} key={b.id} />
+          ))}
+        </Picker>
+      </View>
 
       <Text style={styles.label}>Floor</Text>
-        <View style={{ zIndex: 3000 }}>
-          <DropDownPicker
-            open={floorOpen}
-            value={floor}
-            items={floors}
-            setOpen={setFloorOpen}
-            setValue={setFloor}
-            setItems={setFloors}
-            placeholder="Select Floor"
-            style={styles.dropdown}
-            dropDownContainerStyle={styles.dropdownContainer}
-            disabled={!building}
-            listMode="SCROLLVIEW"
-            zIndex={3000}
-          />
-        </View>
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={floor}
+          onValueChange={value => setFloor(value)}
+          style={styles.pickerStyle}
+          enabled={!!building}
+        >
+          <Picker.Item label="Select Floor" value={undefined} />
+          {floors.map(f => (
+            <Picker.Item label={`Floor ${f}`} value={f} key={f} />
+          ))}
+        </Picker>
+      </View>
 
       <Text style={styles.label}>Classroom</Text>
-      <View style={{ zIndex: 3000 }}>
-          <DropDownPicker
-            open={classroomOpen}
-            value={classroom}
-            items={filteredClassrooms}
-            setOpen={setClassroomOpen}
-            setValue={setClassroom}
-            setItems={() => {}}
-            placeholder="Select Classroom"
-            style={styles.dropdown}
-            dropDownContainerStyle={styles.dropdownContainer}
-            disabled={!floor}
-            listMode="SCROLLVIEW"
-            zIndex={2000}
-          />
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={classroom}
+          onValueChange={value => setClassroom(value)}
+          style={styles.pickerStyle}
+          enabled={!!floor}
+        >
+          <Picker.Item label="Select Classroom" value={undefined} />
+          {filteredClassrooms.map(r => (
+            <Picker.Item label={r.room_no} value={r.id} key={r.id} />
+          ))}
+        </Picker>
       </View>
 
       <Text style={styles.label}>Subject</Text>
-        <View style={{ zIndex: 3000 }}>
-          <DropDownPicker
-            multiple={true}
-            open={subjectOpen}
-            value={selectedSubjects}
-            items={subjects}
-            setOpen={setSubjectOpen}
-            setValue={setSelectedSubjects}
-            setItems={setSubjects}
-            placeholder="Select Subject(s)"
-            style={styles.dropdown}
-            dropDownContainerStyle={styles.dropdownContainer}
-            listMode="SCROLLVIEW"
-            zIndex={1000}
-          />
-        </View>
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={subject}
+          onValueChange={setSubject}
+          style={styles.pickerStyle}
+        >
+          <Picker.Item label="Select Subject" value={undefined} />
+          {subjects.map(s => (
+            <Picker.Item label={s.subject_name || s.name} value={s.id} key={s.id} />
+          ))}
+        </Picker>
+      </View>
 
       <Text style={styles.label}>Password</Text>
       <TextInput style={styles.input} value={password} onChangeText={setPassword} secureTextEntry />
@@ -249,19 +229,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#223263',
   },
-  dropdown: {
-    backgroundColor: '#F4F4F4',
-    borderRadius: 12,
+  pickerContainer: {
     borderWidth: 1,
     borderColor: '#D1D5DB',
-    marginBottom: 10,
-    paddingHorizontal: 10,
-    minHeight: 48,
-  },
-  dropdownContainer: {
-    borderColor: '#D1D5DB',
     borderRadius: 12,
-    zIndex: 1000,
+    backgroundColor: '#F4F4F4',
+    marginBottom: 10,
+    overflow: 'hidden',
+  },
+  pickerStyle: {
+    height: 48,
+    width: '100%',
   },
   button: {
     backgroundColor: '#295393',

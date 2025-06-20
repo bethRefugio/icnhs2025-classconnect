@@ -16,13 +16,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AccountSeeder::class, 
             UsersTableSeeder::class, 
-            SchoolSeeder::class,
             BuildingSeeder::class,
             ClassroomSeeder::class,
             DepartmentSeeder::class,
             TeacherSeeder::class,
             SubjectSeeder::class,
             Subject_Teacher_Seeder::class,
+            StudentSeeder::class,
         ]);
     }
 }
