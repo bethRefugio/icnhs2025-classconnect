@@ -17,7 +17,7 @@ class ClassroomController extends Controller
      */
     public function index(Classroom $model)
     {
-      $classrooms = $model::with('building.school')->paginate(20);
+      $classrooms = $model::with('building')->paginate(20);
       return view('classrooms.index', ['classrooms' => $classrooms]);
     }
 

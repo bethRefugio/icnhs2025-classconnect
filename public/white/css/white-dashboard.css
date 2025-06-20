@@ -14879,7 +14879,7 @@ table.tablesorter thead tr .headerSortDown {
   max-height: calc(100vh - 705px);
   z-index: 4;
   position: relative;
-  overflow: auto;
+  overflow-y: auto;
 }
 
 .sidebar .sidebar-wrapper .dropdown .dropdown-backdrop,

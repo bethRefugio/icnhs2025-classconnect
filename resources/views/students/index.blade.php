@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('Student Management '), 'pageSlug' => 'students', 'pageStudent' => 'Student'])
+@extends('layouts.app', ['page' => __('Student Management '), 'pageSlug' => 'students', 'pageParent' => 'Student'])
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 <h4 class="card-title">Manage Student</h4>
               </div>
               <div class="col-4 text-right">
-                  <a href="/parent/create" class="btn btn-sm btn-primary"> <i class="fas fa-plus"></i> Add Student</a>
+                  <a href="/student/create" class="btn btn-sm btn-primary"> <i class="fas fa-plus"></i> Add Student</a>
               </div>
           </div>
         </div>
@@ -45,7 +45,6 @@
                     <td>{{ $student->contact_no }}</td>
                     <td>{{ $student->LRN }}</td>
                     <td>{{ $student->year_level }}</td>
-                    <td>{{ $student->contact_no }}</td>
                     <td>
                       @if($student->teacher)
                         {{ $student->teacher->name }}
@@ -53,17 +52,17 @@
                     </td>
                     <td>{{ $student->parent }}</td>
                     <td>
-                      @if($teacher->classroom)
-                        {{ $teacher->classroom->room_no }}
+                      @if($student->classroom)
+                        {{ $student->classroom->room_no }}
                       @endif
                     </td>
                     <td>
-                      @if($teacher->classroom && $teacher->classroom->building)
-                        {{ $teacher->classroom->building->name }}
+                      @if($student->classroom && $student->classroom->building)
+                        {{ $student->classroom->building->name }}
                       @endif
                     </td>
                     
-                    <!-- <td>{{ $parent->account->name }}</td> -->
+
                     <td class="text-right">
                         <div class="dropdown">
                           <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,17 +70,17 @@
                             <i class="tim-icons icon-bullet-list-67"></i>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="/parent/{{ $parent->id }}/edit">
+                            <a class="dropdown-item" href="/student/{{ $student->id }}/edit">
                               <i class="fas fa-pencil-alt"></i> Edit
                             </a>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-backdrop='static' data-keyboard="false" data-target="#exampleModalCenter_{{ $parent->id }}" >
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-backdrop='static' data-keyboard="false" data-target="#exampleModalCenter_{{ $student->id }}" >
                                 <i class="fa fa-trash"></i> Delete
                             </a>
                           </div>
                         </div>
 
                         <!--Modal -->
-                        <div class="modal fade" id="exampleModalCenter_{{ $parent->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="exampleModalCenter_{{ $student->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -90,11 +89,11 @@
                                         </h4>
                                     </div>
                                     <div class="modal-body" align="center">
-                                        Are you sure you want to delete this parent?
+                                        Are you sure you want to delete this student?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <form method="post" action="{{ route('parent.destroy', $parent) }}" autocomplete="off">
+                                        <form method="post" action="{{ route('student.destroy', $student) }}" autocomplete="off">
                                           {{ csrf_field() }}
                                           {{ method_field('DELETE') }}
                                           <button type="submit" class="btn btn-danger"> Delete </button>
@@ -111,7 +110,7 @@
               </tbody>
             </table>
           </div>
-          <div class="float-right">{{ $parents->links() }}</div>
+          <div class="float-right">{{ $students->links() }}</div>
 
         </div>
 

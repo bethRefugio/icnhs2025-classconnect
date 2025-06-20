@@ -11,7 +11,7 @@
         
             <li @if ($pageSlug == 'dashboard') class="active " @endif>
                 <a href="{{ route('home') }}">
-                    <i class="tim-icons icon-chart-pie-36"></i>
+                    <i class="tim-icons icon-chart-bar-32"></i>
                     <p>{{ auth()->user()->account_id == 1 ? 'Dashboard' : 'Search' }}</p>
                 </a>
             </li>
@@ -25,8 +25,9 @@
             </li>
         @endif
 
-        <!-- 
+       
         @if (auth()->user()->account_id != 3)
+         <!-- 
             <li>
                 <a data-toggle="collapse" href="#school-div" aria-expanded="true">
                     <i class="tim-icons icon-chart-bar-32"></i>
@@ -55,7 +56,7 @@
 
             <li>
                 <a data-toggle="collapse" href="#building-div" aria-expanded="true">
-                    <i class="tim-icons icon-components"></i>
+                    <i class="bi bi-buildings"></i>
                     <span class="nav-link-text" >{{ __('Buildings') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
@@ -80,7 +81,7 @@
 
             <li>
                 <a data-toggle="collapse" href="#classroom-div" aria-expanded="true">
-                    <i class="tim-icons icon-basket-simple"></i>
+                    <i class="bi bi-door-open"></i>
                     <span class="nav-link-text" >{{ __('Classrooms') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
@@ -106,7 +107,7 @@
 
             <li>
                 <a data-toggle="collapse" href="#department-div" aria-expanded="true">
-                    <i class="tim-icons icon-tablet-2"></i>
+                    <i class="bi bi-collection"></i>
                     <span class="nav-link-text" >{{ __('Departments') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
@@ -132,7 +133,7 @@
             
             <li>
                 <a data-toggle="collapse" href="#subject-div" aria-expanded="true">
-                    <i class="tim-icons icon-tablet-2"></i>
+                    <i class="tim-icons icon-book-bookmark"></i>
                     <span class="nav-link-text" >{{ __('Subjects') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
@@ -157,7 +158,7 @@
 
             <li>
                 <a data-toggle="collapse" href="#teacher-div" aria-expanded="true">
-                    <i class="tim-icons icon-badge"></i>
+                    <i class="bi bi-person-vcard"></i>
                     <span class="nav-link-text" >{{ __('Teachers') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
@@ -180,9 +181,34 @@
                 </div>
             </li>
 
+             <li>
+                <a data-toggle="collapse" href="#student-div" aria-expanded="true">
+                    <i class="bi bi-mortarboard"></i>
+                    <span class="nav-link-text" >{{ __('Students') }}</span>
+                    <b class="caret mt-1"></b>
+                </a>
+
+                <div class="collapse {{ $pageParent == 'Student' ? 'show' : '' }}" id="student-div">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug == 'students') class="active " @endif>
+                            <a href="{{ route('student.index') }}">
+                                <i class="tim-icons icon-bullet-list-67"></i>
+                                <p>{{ _('List of students') }}</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('student.create')  }}">
+                                <i class="tim-icons icon-simple-add"></i>
+                                <p>{{ _('Add Student') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
             <li>
                 <a data-toggle="collapse" href="#parent-div" aria-expanded="true">
-                    <i class="tim-icons icon-badge"></i>
+                    <i class="bi bi-person-heart"></i>
                     <span class="nav-link-text" >{{ __('Parents') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
@@ -208,22 +234,22 @@
 
         @if (auth()->user()->account_id == 1)
             <li>
-                <a data-toggle="collapse" href="#staff-div" aria-expanded="true">
-                    <i class="tim-icons icon-badge"></i>
+                <a data-toggle="collapse" href="#user-div" aria-expanded="true">
+                    <i class="bi bi-people"></i>
                     <span class="nav-link-text" >{{ __('Users') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
 
-                <div class="collapse {{ $pageParent == 'Staff' ? 'show' : '' }}" id="staff-div">
+                <div class="collapse {{ $pageParent == 'User' ? 'show' : '' }}" id="user-div">
                     <ul class="nav pl-4">
-                        <li @if ($pageSlug == 'staffs') class="active " @endif>
-                            <a href="{{ route('staff.index') }}">
+                        <li @if ($pageSlug == 'users') class="active " @endif>
+                            <a href="{{ route('user.index') }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
                                 <p>{{ _('List of Users') }}</p>
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('staff.create')  }}">
+                            <a href="{{ route('user.create')  }}">
                                 <i class="tim-icons icon-simple-add"></i>
                                 <p>{{ _('Add User') }}</p>
                             </a>
@@ -235,8 +261,8 @@
 
             <li @if ($pageSlug == 'profile') class="active " @endif>
                 <a href="{{ route('profile.edit')  }}">
-                    <i class="tim-icons icon-single-02"></i>
-                    <p>{{ _('My Profile') }}</p>
+                    <i class="bi bi-sliders"></i>
+                    <p>{{ _('Settings') }}</p>
                 </a>
             </li>
 

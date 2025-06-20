@@ -20,7 +20,7 @@ class StudentController extends Controller
      */
     public function index(Student $model)
     {
-        $students = $model->with('classrooms')->paginate(20);
+        $students = $model::paginate(20);
         return view('students.index', ['students' => $students]);
     }
 

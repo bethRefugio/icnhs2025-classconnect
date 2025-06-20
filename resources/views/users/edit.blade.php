@@ -1,13 +1,13 @@
-@extends('layouts.app', ['page' => __('Edit Staff'), 'pageSlug' => 'staffs', 'pageParent' => 'Staff'])
+@extends('layouts.app', ['page' => __('Edit User'), 'pageSlug' => 'users', 'pageParent' => 'User'])
 
 @section('content')
     <div class="row">
         <div class="col col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">{{ _('Edit Staff') }}</h5>
+                    <h5 class="title">{{ _('Edit User') }}</h5>
                 </div>
-                <form method="post" action="{{ route('staff.update', $staff) }}" autocomplete="off">
+                <form method="post" action="{{ route('user.update', $user) }}" autocomplete="off">
                     <div class="card-body">
                             @csrf
                             @method('put')
@@ -16,20 +16,20 @@
 
                             <div class="form-group{{ $errors->has('name') ? ' has-danger' : '' }}">
                                 <label>{{ _('Name') }}</label>
-                                <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ _('Enter name') }}" value="{{ old('name', $staff->name) }}">
+                                <input type="text" name="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="{{ _('Enter name') }}" value="{{ old('name', $user->name) }}">
                                 @include('alerts.feedback', ['field' => 'name'])
                             </div>
 
                             <div class="form-group{{ $errors->has('email') ? ' has-danger' : '' }}">
                                 <label>{{ _('Email') }}</label>
-                                <input readonly type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ _('Enter email') }}" value="{{ old('email', $staff->email) }}">
+                                <input readonly type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ _('Enter email') }}" value="{{ old('email', $user->email) }}">
                                 @include('alerts.feedback', ['field' => 'email'])
                             </div>
 
                             @php /*
                             <div class="form-group{{ $errors->has('password') ? ' has-danger' : '' }}">
                                 <label>{{ _('Password') }}</label>
-                                <input type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ _('Enter password') }}" value="{{ old('password', $staff->password) }}">
+                                <input type="password" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ _('Enter password') }}" value="{{ old('password', $user->password) }}">
                                 @include('alerts.feedback', ['field' => 'password'])
                             </div>
                             */ @endphp
@@ -37,17 +37,17 @@
                             <div class="form-group{{ $errors->has('is_allowed_login') ? ' has-danger' : '' }}">
                                 <label>{{ _('Allowed Login?') }}</label>
                                 <select name="is_allowed_login" class="form-control{{ $errors->has('is_allowed_login') ? ' is-invalid' : '' }}">
-                                    <option value="1" @if ($staff->is_allowed_login === 1) selected @endif >True</option>
-                                    <option value="0" @if ($staff->is_allowed_login === 0) selected @endif >False</option>
+                                    <option value="1" @if ($user->is_allowed_login === 1) selected @endif >True</option>
+                                    <option value="0" @if ($user->is_allowed_login === 0) selected @endif >False</option>
                                 </select>
                                 @include('alerts.feedback', ['field' => 'is_allowed_login'])
                             </div>
 
                             <div class="form-group{{ $errors->has('account_id') ? ' has-danger' : '' }}">
-                                <label>{{ _('Allowed Login?') }}</label>
+                                <label>{{ _('Role') }}</label>
                                 <select name="account_id" class="form-control{{ $errors->has('account_id') ? ' is-invalid' : '' }}">
                                     @foreach ($roles as $role)
-                                        <option value="{{ $role->id }}" @if ($staff->account_id === $role->id) selected @endif >
+                                        <option value="{{ $role->id }}" @if ($user->account_id === $role->id) selected @endif >
                                             {{ $role->name }}
                                         </option>
                                     @endforeach
@@ -58,7 +58,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-fill btn-primary"> <i class="fas fa-save"></i> {{ _('Save') }}</button>
-                        <a href="/staff" class="btn btn-fill btn-default"> <i class="tim-icons icon-simple-remove"></i> {{ _('Close') }}</a>
+                        <a href="/user" class="btn btn-fill btn-default"> <i class="tim-icons icon-simple-remove"></i> {{ _('Close') }}</a>
                     </div>
                 </form>
             </div>
