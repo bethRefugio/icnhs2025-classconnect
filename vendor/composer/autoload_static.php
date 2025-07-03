@@ -350,8 +350,8 @@ class ComposerStaticInitd56438dce9a0f24edbf529263457199f
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-factory/src',
-            1 => __DIR__ . '/..' . '/psr/http-message/src',
+            0 => __DIR__ . '/..' . '/psr/http-message/src',
+            1 => __DIR__ . '/..' . '/psr/http-factory/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -551,6 +551,7 @@ class ComposerStaticInitd56438dce9a0f24edbf529263457199f
         'App\\Factories\\ConfigurationFactory' => __DIR__ . '/..' . '/laravel/pint/app/Factories/ConfigurationFactory.php',
         'App\\Factories\\ConfigurationResolverFactory' => __DIR__ . '/..' . '/laravel/pint/app/Factories/ConfigurationResolverFactory.php',
         'App\\Http\\Controllers\\ApiAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/ApiAuthController.php',
+        'App\\Http\\Controllers\\Api\\BuildingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/BuildingController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -568,7 +569,7 @@ class ComposerStaticInitd56438dce9a0f24edbf529263457199f
         'App\\Http\\Controllers\\Web\\DepartmentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/DepartmentController.php',
         'App\\Http\\Controllers\\Web\\ParentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/ParentController.php',
         'App\\Http\\Controllers\\Web\\SchoolController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/SchoolController.php',
-        'App\\Http\\Controllers\\Web\\StaffController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/StaffController.php',
+        'App\\Http\\Controllers\\Web\\StudentController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/StudentController.php',
         'App\\Http\\Controllers\\Web\\SubjectController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/SubjectController.php',
         'App\\Http\\Controllers\\Web\\TeacherController' => __DIR__ . '/../..' . '/app/Http/Controllers/Web/TeacherController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
@@ -594,6 +595,7 @@ class ComposerStaticInitd56438dce9a0f24edbf529263457199f
         'App\\Http\\Requests\\School\\Store' => __DIR__ . '/../..' . '/app/Http/Requests/School/Store.php',
         'App\\Http\\Requests\\Staff\\Store' => __DIR__ . '/../..' . '/app/Http/Requests/Staff/Store.php',
         'App\\Http\\Requests\\Staff\\Update' => __DIR__ . '/../..' . '/app/Http/Requests/Staff/Update.php',
+        'App\\Http\\Requests\\Student\\Store' => __DIR__ . '/../..' . '/app/Http/Requests/Student/Store.php',
         'App\\Http\\Requests\\Subject\\Store' => __DIR__ . '/../..' . '/app/Http/Requests/Subject/Store.php',
         'App\\Http\\Requests\\Teacher\\Store' => __DIR__ . '/../..' . '/app/Http/Requests/Teacher/Store.php',
         'App\\Http\\Requests\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRequest.php',
@@ -603,6 +605,7 @@ class ComposerStaticInitd56438dce9a0f24edbf529263457199f
         'App\\Models\\Classroom' => __DIR__ . '/../..' . '/app/Models/Classroom.php',
         'App\\Models\\Department' => __DIR__ . '/../..' . '/app/Models/Department.php',
         'App\\Models\\School' => __DIR__ . '/../..' . '/app/Models/School.php',
+        'App\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
         'App\\Models\\Subject' => __DIR__ . '/../..' . '/app/Models/Subject.php',
         'App\\Models\\Teacher' => __DIR__ . '/../..' . '/app/Models/Teacher.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
@@ -738,7 +741,7 @@ class ComposerStaticInitd56438dce9a0f24edbf529263457199f
         'Database\\Seeders\\ClassroomSeeder' => __DIR__ . '/../..' . '/database/seeders/ClassroomSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\DepartmentSeeder' => __DIR__ . '/../..' . '/database/seeders/DepartmentSeeder.php',
-        'Database\\Seeders\\SchoolSeeder' => __DIR__ . '/../..' . '/database/seeders/SchoolSeeder.php',
+        'Database\\Seeders\\StudentSeeder' => __DIR__ . '/../..' . '/database/seeders/StudentSeeder.php',
         'Database\\Seeders\\SubjectSeeder' => __DIR__ . '/../..' . '/database/seeders/SubjectSeeder.php',
         'Database\\Seeders\\Subject_Teacher_Seeder' => __DIR__ . '/../..' . '/database/seeders/Subject_Teacher_Seeder.php',
         'Database\\Seeders\\TeacherSeeder' => __DIR__ . '/../..' . '/database/seeders/TeacherSeeder.php',

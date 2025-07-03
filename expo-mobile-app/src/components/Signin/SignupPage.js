@@ -12,6 +12,9 @@ const SignupPage = ({ navigation }) => {
     if (role.label === 'Teacher') {
       navigation.navigate('TeacherSignup', { account_id: role.accountId });
     }
+    if (role.label === 'Student') {
+      navigation.navigate('StudentSignup', { account_id: role.accountId });
+    }
     // Add navigation for other roles as needed
   };
 

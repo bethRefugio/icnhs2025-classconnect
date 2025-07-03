@@ -79,7 +79,7 @@ const LoginPage = ({ navigation, onLogin }) => {
           <Text style={styles.buttonText}>Log in</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('SignupPage')}>
-          <Text style={styles.link}>Don't have an account? Sign in</Text>
+          <Text style={styles.link}>Don't have an account? Sign up</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

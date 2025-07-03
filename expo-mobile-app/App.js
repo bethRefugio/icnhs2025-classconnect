@@ -6,15 +6,17 @@ import { Ionicons } from '@expo/vector-icons';
 import { View, ActivityIndicator, Image, Text, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import LoginPage from './src/pages/LoginPage';
-import SignupPage from './src/pages/Signin/SignupPage';
-import HomePage from './src/pages/HomePage';
-import TeachersListPage from './src/pages/Teachers/TeachersListPage';
-import ProjectsPage from './src/pages/ProjectsPage';
-import RequestPage from './src/pages/RequestPage';
-import AnnouncementsPage from './src/pages/AnnouncementsPage';
-import SettingsPage from './src/pages/SettingsPage';
-import TeacherSignup from './src/pages/Signin/TeacherSignup';
+import LoginPage from './src/components/LoginPage';
+import SignupPage from './src/components/Signin/SignupPage';
+import HomePage from './src/components/HomePage';
+import TeachersListPage from './src/components/Teachers/TeachersListPage';
+import ProjectsPage from './src/components/ProjectsPage';
+import RequestPage from './src/components/RequestPage';
+import AnnouncementsPage from './src/components/AnnouncementsPage';
+import SettingsPage from './src/components/SettingsPage';
+import TeacherSignup from './src/components/Signin/TeacherSignup';
+import StudentSignup from './src/components/Signin/StudentForm';
+import MessagesPage from './src/components/Messages/MessagesPage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -38,6 +40,12 @@ function ResidentTabs({ onLogout }) {
       <Tab.Screen
         name="Home"
         component={HomePage}
+        options={{ headerShown: false }} // <-- Hide the default header for Home
+      />
+
+      <Tab.Screen
+        name="Messages"
+        component={MessagesPage}
         options={{ headerShown: false }} // <-- Hide the default header for Home
       />
       {/*<Tab.Screen name="Request" component={RequestPage} />
@@ -103,6 +111,7 @@ export default function App() {
             </Stack.Screen>
             <Stack.Screen name="SignupPage" component={SignupPage} options={{ headerShown: true }} />
              <Stack.Screen name="TeacherSignup" component={TeacherSignup} options={{ headerShown: false }} />
+             <Stack.Screen name="StudentSignup" component={StudentSignup} options={{ headerShown: false }} />
           </>
         ) : (
           <>
@@ -120,6 +129,7 @@ export default function App() {
             />
             <Stack.Screen name="SignupPage" component={SignupPage} options={{ headerShown: false }} />
             <Stack.Screen name="TeacherSignup" component={TeacherSignup} options={{ headerShown: false }} />
+            <Stack.Screen name="StudentSignup" component={StudentSignup} options={{ headerShown: false }} />
           </>
         )}
       </Stack.Navigator>
