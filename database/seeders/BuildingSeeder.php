@@ -17,7 +17,7 @@ class BuildingSeeder extends Seeder
     {
         DB::table('buildings')->insert([
             'id' => 1,
-            'name' => 'Aquino Building',
+            'name' => 'Dimaporo Building',
             'no_of_floors' => '3',
             'created_at' => now(),
             'updated_at' => now()
