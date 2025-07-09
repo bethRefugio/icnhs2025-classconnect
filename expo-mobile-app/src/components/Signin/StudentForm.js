@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Alert } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import axios from 'axios';
 import { API_URL } from '../../../config';
 
@@ -77,7 +78,7 @@ const StudentSignup = ({ route, navigation }) => {
 
   // Submit handler (same as before)
   const handleSubmit = async () => {
-    if (!name || !email || !password || !department || !building || !floor || !classroom || !subject) {
+    if (!name || !email || !password || !LRN || !year_level || !teacher || !building || !floor || !classroom || !subject) {
       Alert.alert('Error', 'Please fill all required fields.');
       return;
     }
@@ -108,13 +109,19 @@ const StudentSignup = ({ route, navigation }) => {
       Alert.alert('Success', 'Student account created!');
       navigation.navigate('Login');
     } catch (error) {
+      console.log(error?.response?.data || error);
       Alert.alert('Error', 'Failed to create student account.');
     }
   };
 
   return (
+    <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 5}
+        >
     <ScrollView style={{ flex: 1, backgroundColor: '#fff' }} contentContainerStyle={{ padding: 20 }}>
-      <Text style={styles.title}>Sign in</Text>
+      <Text style={styles.title}>Sign up</Text>
 
       <Text style={styles.subtitle}>Student</Text>
 
@@ -214,12 +221,13 @@ const StudentSignup = ({ route, navigation }) => {
       <TextInput style={styles.input} value={password} onChangeText={setPassword} secureTextEntry />
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Sign in</Text>
+        <Text style={styles.buttonText}>Sign up</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Text style={styles.link}>Already have an account? Log in</Text>
       </TouchableOpacity>
     </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

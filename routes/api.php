@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Teacher;
+use App\Models\Student;
 use App\Models\Department;
 use App\Models\Subject;
 use App\Models\Classroom;
@@ -92,6 +93,22 @@ Route::post('/subject_teacher', function (Request $request) {
         ]);
     }
     return response()->json(['success' => true]);
+});
+
+Route::post('/students', function (Request $request) {
+    $validated = $request->validate([
+        'user_id' => 'required|integer|exists:users,id',
+        'name' => 'required|string|max:255',
+        'email' => 'required|email',
+        'contact_no' => 'nullable|string|max:50',
+        'LRN' => 'required|string|max:12',
+        'year_level' => 'required|string|max:50',
+        'adviser_id' => 'required|integer|exists:teachers,id',
+        'parent' => 'nullable|string|max:255',
+        'room_id' => 'nullable|integer',
+    ]);
+    $student = Student::create($validated);
+    return response()->json(['student' => $student]);
 });
 
 Route::get('/subjects', function() {
