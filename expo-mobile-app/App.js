@@ -42,20 +42,6 @@ function ResidentTabs({ onLogout }) {
         component={HomePage}
         options={{ headerShown: false }} // <-- Hide the default header for Home
       />
-
-      <Tab.Screen
-        name="Messages"
-        component={MessagesPage}
-        options={{ headerShown: false }} // <-- Hide the default header for Home
-      />
-      {/*<Tab.Screen name="Request" component={RequestPage} />
-      <Tab.Screen
-        name="TeachersListPage"
-        component={TeachersListPage}
-        options={{ headerShown: true, title: 'Teachers' }}
-      />
-      <Tab.Screen name="Announcements" component={AnnouncementsPage} />
-      <Tab.Screen name="Projects" component={ProjectsPage} />*/}
       <Tab.Screen name="Menu">
         {(props) => <SettingsPage {...props} onLogout={onLogout} />}
       </Tab.Screen>
@@ -112,6 +98,8 @@ export default function App() {
             <Stack.Screen name="SignupPage" component={SignupPage} options={{ headerShown: true }} />
              <Stack.Screen name="TeacherSignup" component={TeacherSignup} options={{ headerShown: false }} />
              <Stack.Screen name="StudentSignup" component={StudentSignup} options={{ headerShown: false }} />
+             <Stack.Screen name="MessagesPage" component={MessagesPage} options={{ headerShown: false }} />
+             <Stack.Screen name="SettingsPage" component={SettingsPage} options={{ headerShown: false }} />
           </>
         ) : (
           <>

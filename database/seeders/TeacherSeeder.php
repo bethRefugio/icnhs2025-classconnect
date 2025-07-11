@@ -22,7 +22,7 @@ class TeacherSeeder extends Seeder
             'contact_no' => '09672295909',
             'vacant_time' => '7:30 am - 8:15 am ; 11:00 am - 11:45 am',
             'user_id' => 7,
-            'room_id'=> 12,
+            'room_id'=> 1,
             'department_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
@@ -35,7 +35,7 @@ class TeacherSeeder extends Seeder
             'contact_no' => '09061945595',
             'vacant_time' => '7:30 am - 8:15 am ; 8:15 am - 9:00 am',
             'user_id' => 8,
-            'room_id'=> 19,
+            'room_id'=> 2,
             'department_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
@@ -48,7 +48,7 @@ class TeacherSeeder extends Seeder
             'contact_no' => '09606410076',
             'vacant_time' => '11:00 am - 11:45 am ; 2:15 pm - 3:00 pm',
             'user_id' => 9,
-            'room_id'=> 25,
+            'room_id'=> 3,
             'department_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
@@ -61,7 +61,7 @@ class TeacherSeeder extends Seeder
             'contact_no' => '09157504369',
             'vacant_time' => '9:30 am - 10:15 am ; 1:30 pm - 2:15 pm',
             'user_id' => 10,
-            'room_id'=> 38,
+            'room_id'=> 1,
             'department_id' => 1,
             'created_at' => now(),
             'updated_at' => now()
@@ -74,7 +74,7 @@ class TeacherSeeder extends Seeder
             'contact_no' => '09162923285',
             'vacant_time' => '9:30 am - 10:15 am ; 11:00 am - 11:45 am',
             'user_id' => 12,
-            'room_id'=> 57,
+            'room_id'=> 1,
             'department_id' => 1,
             'created_at' => now(),
             'updated_at' => now()

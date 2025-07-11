@@ -127,6 +127,7 @@ const TeacherSignup = ({ route, navigation }) => {
     >
     <ScrollView style={{ flex: 1, backgroundColor: '#fff' }} contentContainerStyle={{ padding: 20 }}>
       <Text style={styles.title}>Sign up</Text>
+
       <Text style={styles.subtitle}>Teacher</Text>
       <Text style={styles.label}>Name</Text>
       <TextInput style={styles.input} value={name} onChangeText={setName} />

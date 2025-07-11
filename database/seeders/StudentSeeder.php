@@ -24,7 +24,7 @@ class StudentSeeder extends Seeder
             'LRN' => '124587654782',
             'year_level' => 'Grade 7',            
             'adviser_id' => 1,
-            'room_id'=> 12,
+            'room_id'=> 1,
             'parent' => 'Parent Sample',
             'created_at' => now(),
             'updated_at' => now()
