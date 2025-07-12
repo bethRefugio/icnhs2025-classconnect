@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SidebarChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,4 +58,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::get('search-teacher', 'App\Http\Controllers\Front\ParentsController@searchTeacher')->middleware('role:administrator|staff|parent');
 	Route::get('view-teacher/{id}', 'App\Http\Controllers\Front\ParentsController@show')->middleware('role:administrator|staff|parent');
+
+	
+
+	Route::post('/messages', [MessageController::class, 'store']);
+	Route::post('/messages/{message}/read', [MessageController::class, 'markAsRead']);
+	
+	Route::get('/chat/{user?}', [SidebarChatController::class, 'sidebarChat'])->name('chat.show');
+	Route::post('/chat/{user}', [SidebarChatController::class, 'sendMessage'])->name('chat.send');
 });

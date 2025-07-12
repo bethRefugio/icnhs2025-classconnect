@@ -14,6 +14,10 @@ use App\Models\Student;
 use App\Models\Department;
 use App\Models\Subject;
 use App\Models\Classroom;
+use App\Models\Message;
+use App\Models\Conversation;
+use Illuminate\Support\Facades\Auth;
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -121,4 +125,98 @@ Route::get('/classrooms', function() {
     return response()->json([
         'classrooms' => Classroom::all()
     ]);
+});
+
+
+// Get all conversations for the logged-in user
+Route::middleware('auth:sanctum')->get('/conversations', function (Request $request) {
+    $user = $request->user();
+
+    // Get all conversations the user is part of
+    $conversations = Conversation::whereHas('messages', function($q) use ($user) {
+        $q->where('user_id', $user->id)->orWhere('receiver_id', $user->id);
+    })->with(['messages' => function($q) {
+        $q->latest()->first();
+    }])->get();
+
+    // Or, if you want a simple user list (excluding self):
+    $users = User::where('id', '!=', $user->id)->get();
+
+    // For each user, get last message and unread count
+    $result = $users->map(function($u) use ($user) {
+        $lastMessage = Message::where(function($q) use ($user, $u) {
+            $q->where('user_id', $user->id)->where('receiver_id', $u->id);
+        })->orWhere(function($q) use ($user, $u) {
+            $q->where('user_id', $u->id)->where('receiver_id', $user->id);
+        })->orderByDesc('created_at')->first();
+
+        $unread = Message::where('user_id', $u->id)
+            ->where('receiver_id', $user->id)
+            ->whereNull('read_at')
+            ->count();
+
+        return [
+            'id' => $u->id,
+            'name' => $u->name,
+            'avatar' => $u->avatar ?? null, // Add avatar field to users table if needed
+            'lastMessage' => $lastMessage ? $lastMessage->content : '',
+            'time' => $lastMessage ? $lastMessage->created_at->diffForHumans() : '',
+            'unread' => $unread,
+        ];
+    });
+
+    return response()->json(['conversations' => $result]);
+});
+
+// Get messages between logged-in user and another user
+Route::middleware('auth:sanctum')->get('/messages/{user}', function (Request $request, $userId) {
+    $user = $request->user();
+
+    $messages = Message::where(function($q) use ($user, $userId) {
+        $q->where('user_id', $user->id)->where('receiver_id', $userId);
+    })->orWhere(function($q) use ($user, $userId) {
+        $q->where('user_id', $userId)->where('receiver_id', $user->id);
+    })->orderBy('created_at')->get()->map(function($m) use ($user) {
+        return [
+            'id' => $m->id,
+            'text' => $m->content,
+            'time' => $m->created_at->format('h:i a'),
+            'fromMe' => $m->user_id == $user->id,
+        ];
+    });
+
+    return response()->json(['messages' => $messages]);
+});
+
+// Send a message
+Route::middleware('auth:sanctum')->post('/messages/{user}', function (Request $request, $userId) {
+    $user = $request->user();
+    $request->validate(['content' => 'required|string']);
+
+    $message = Message::create([
+        'user_id' => $user->id,
+        'receiver_id' => $userId,
+        'content' => $request->content,
+        'type' => 'text',
+    ]);
+
+    // Optionally broadcast event here
+
+    return response()->json(['message' => [
+        'id' => $message->id,
+        'text' => $message->content,
+        'time' => $message->created_at->format('h:i a'),
+        'fromMe' => true,
+    ]]);
+});
+
+// Get all users except the current user (for chat search)
+Route::middleware('auth:sanctum')->get('/users', function (Request $request) {
+    $user = $request->user();
+
+    $users = \App\Models\User::where('id', '!=', $user->id)
+        ->select('id', 'name', 'email') // add 'avatar' if you have it
+        ->get();
+
+    return response()->json(['users' => $users]);
 });

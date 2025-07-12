@@ -17,6 +17,7 @@ import SettingsPage from './src/components/SettingsPage';
 import TeacherSignup from './src/components/Signin/TeacherSignup';
 import StudentSignup from './src/components/Signin/StudentForm';
 import MessagesPage from './src/components/Messages/MessagesPage';
+import Conversation from './src/components/Messages/Conversation';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -99,6 +100,7 @@ export default function App() {
              <Stack.Screen name="TeacherSignup" component={TeacherSignup} options={{ headerShown: false }} />
              <Stack.Screen name="StudentSignup" component={StudentSignup} options={{ headerShown: false }} />
              <Stack.Screen name="MessagesPage" component={MessagesPage} options={{ headerShown: false }} />
+             <Stack.Screen name="Conversation" component={Conversation} options={{ headerShown: false }} />
              <Stack.Screen name="SettingsPage" component={SettingsPage} options={{ headerShown: false }} />
           </>
         ) : (
@@ -118,6 +120,9 @@ export default function App() {
             <Stack.Screen name="SignupPage" component={SignupPage} options={{ headerShown: false }} />
             <Stack.Screen name="TeacherSignup" component={TeacherSignup} options={{ headerShown: false }} />
             <Stack.Screen name="StudentSignup" component={StudentSignup} options={{ headerShown: false }} />
+            <Stack.Screen name="MessagesPage" component={MessagesPage} options={{ headerShown: false }} />
+            <Stack.Screen name="Conversation" component={Conversation} options={{ headerShown: false }} />
+    
           </>
         )}
       </Stack.Navigator>

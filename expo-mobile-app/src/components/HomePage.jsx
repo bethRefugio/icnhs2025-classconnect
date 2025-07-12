@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { Ionicons, MaterialCommunityIcons, FontAwesome5, Feather } from '@expo/vector-icons';
 import TeachersListPage from './Teachers/TeachersListPage';
+import MessagesPage from './Messages/MessagesPage';
 import { API_URL } from '../../config';
 
 const HomePage = ({ navigation }) => {
@@ -80,7 +81,7 @@ const HomePage = ({ navigation }) => {
           label="Messages"
           color="#E6C6FB"
           badge={1}
-          onPress={() => navigation.navigate('Messages')}
+          onPress={() => navigation.navigate('MessagesPage')}
         />
         <MenuButton
           icon={<Feather name="map-pin" size={32} color="#295393" />}

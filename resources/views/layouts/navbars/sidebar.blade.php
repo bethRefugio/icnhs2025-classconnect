@@ -259,6 +259,28 @@
             </li>
         @endif
 
+        @if (auth()->user()->account_id == 1)
+            <li>
+                <a data-toggle="collapse" href="#chat-div" aria-expanded="true">
+                    <i class="bi bi-chat-dots"></i>
+                    <span class="nav-link-text">{{ __('Chats') }}</span>
+                    <b class="caret mt-1"></b>
+                </a>
+                <div class="collapse {{ $pageParent == 'Chat' ? 'show' : '' }}" id="chat-div">
+                    <ul class="nav pl-4">
+                        <li @if ($pageSlug == 'chat') class="active " @endif>
+                            <a href="{{ route('chat.show') }}">
+                                <i class="tim-icons icon-chat-33"></i>
+                                <p>{{ _('Open Chat') }}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        @endif
+        
+
+
             <li @if ($pageSlug == 'profile') class="active " @endif>
                 <a href="{{ route('profile.edit')  }}">
                     <i class="bi bi-sliders"></i>
